@@ -9,4 +9,4 @@ Group 5: Colby Frison, Jhan Paul Mackey, Caleb Furley, Levin Ward, Felix Werner
 
 
 ## Structure
-Each objective has its own folder, and each task will have its own subfolder. implementation
+Each objective has its own folder, and each task will have its own subfolder.
