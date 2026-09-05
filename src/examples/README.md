@@ -12,14 +12,24 @@ The workload example files are based on the inputted distribution of the workloa
 
 - **Uniform**: This distribution requires an inclusive range of integers for the workload generator to randomly pick a number with equal probability for each calculation. This should create some baseline of constant unpredictability; that is, it should make a large payload (i.e., a job with with 3 tasks of size 3) have the exact likelihood to be generated as a minimal one (i.e., a job with 1 task of size 1).
 
-- **Normal**: This distriubtion requires inputs of a mean and standard deviation for the generator to produce values clustering heavily around the given average. This should create a stable, bell-curve workload. Extreme variations are possible but rare, while most of the generated job counts, task quantities, and work sizes consistently hover around the average.
+- **Normal**: This distriubtion requires inputs of a mean and standard deviation for the generator to produce values clustering heavily around the given average. This should create a stable, bell-curve-like workload. Extreme variations are possible but rare, while most of the generated job counts, task quantities, and work sizes consistently hover around the average.
 
 - **Geometric**: This distribution requires a probability parameter input for the generator to model the number of failures before a successful trial. This produces many small numbers or zeros with an occassional trailing spike(s). It frequently produces very lightweight (or no) elements, followed sometimes by some unusually large payload. 
 
 - **Poisson**: This distribution requires a Poisson mean (denoted lambda) that handles the average rate of jobs per time step for the generator to model the probability of independent events occuring in a fixed interval. This should mimic natural user traffic; it should hover around lambda but can also produce unpredictable clusters (or none at all).
 
 ### Workload Visualizer
+The provided .png images/sketches of the histograms and scatter plots for each distribution (including a default, fixed distribution) are randomly generated from the associated `hist.py` and `scat.py` scripts. The sketches illustrate an approximate visualization of the workload given different distribution inputs. Note that the scatter plot defines 2 jobs per time step to visualize how the task counts are distributed. More sketches can be added to show other examples.
 
+- **Fixed**: For the histogram, we assume exactly 2 jobs per time step. For the scatter plot, we assume exactly 3 jobs.
+
+- **Uniform**: For both the histogram and scatter plot, we randomly choose between 1-5 jobs per time step.
+
+- **Normal**: For both the histogram and scatter plot, we center 3 jobs per time step, with a minimum of 0 and 1 for the histogram and scatter plot, respectively.
+
+- **Geometric**: For both the histogram and scatter plot, we configure the probability parameter to be 0.4, with a minimum of 0 and 1 for the histogram and scatter plot, respectively.
+
+- **Poisson**: For both the histogram and scatter plot, we center approximately 2 jobs per time step, with a minimum of 0 and 1 for the histogram and scatter plot, respectively.
 
 ## Object B
 
