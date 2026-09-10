@@ -1,0 +1,18 @@
+int clock = 0
+queue<jobs> jobs = ... // sorted by arrival time, asc
+list<queue<tasks>> queues = empty list  // will store the tasks of the queue in our system
+list<int> servers = initialised with 0  // will store the remaining time
+while (jobs not empty) {
+	if (jobs.peek().arrival_time != clock) {
+		increase_clock()
+		//	clock++
+		// 	decrease servers by one for every server if > 0
+		// 	if 1 -> 0 (job finished) move to next queue if sink exists
+		//  fill servers with queue tasks if server = 0 and queue non-empty and put server = job.time
+		//  logging
+		continue
+	}
+	job = jobs.pop()
+	if (front queue not full) push job to front queue
+	fill servers with queue tasks if server = 0 and queue non-empty and put server = job.time
+}
