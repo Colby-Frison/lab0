@@ -1,18 +1,77 @@
-int clock = 0
-queue<jobs> jobs = ... // sorted by arrival time, asc
-list<queue<tasks>> queues = empty list  // will store the tasks of the queue in our system
-list<int> servers = initialised with 0  // will store the remaining time
-while (jobs not empty) {
-	if (jobs.peek().arrival_time != clock) {
-		increase_clock()
-		//	clock++
-		// 	decrease servers by one for every server if > 0
-		// 	if 1 -> 0 (job finished) move to next queue if sink exists
-		//  fill servers with queue tasks if server = 0 and queue non-empty and put server = job.time
-		//  logging
-		continue
-	}
-	job = jobs.pop()
-	if (front queue not full) push job to front queue
-	fill servers with queue tasks if server = 0 and queue non-empty and put server = job.time
-}
+# Objective B — Simple Queue Simulator (outline)
+# Driven by remaining work (input + in-system jobs), not a fixed time_limit.
+# Per clock advance: serve -> move -> admit.
+# Full design: ../../design/obj-b/README.md
+#
+# From temp.psuedocode: when next arrival is in the future, tick the clock
+# (serve/move/fill); when arrival == clock, accept into the queue.
+
+# --- State ---
+clock = 0
+systems = load_config()              # list of QueueSystems (Obj B: one; Obj E: many)
+# Each QS: waiting queue, servers[], source?, sink?, edges_in/out, inbound_buffer
+# Global: shared event log, shared qmet writer
+# Inputs: each QS.source is a sorted job stream; plus edge buffers between queues
+
+# Work remains while any source has jobs, any waiting queue nonempty,
+# any server busy, or any inbound_buffer nonempty.
+while work_remaining(systems):
+
+  # If no source job is due at this clock, advance time and process in-system work.
+  if no_arrival_due_at(clock, systems):
+    # --- 1. SERVE: progress jobs already in servers ---
+    for each Qs in systems:
+      for each busy server S in Qs:
+        decrease S remaining / apply server function at rate
+        log TASK-END / TASK-START when task boundaries change
+
+    # --- 2. MOVE: finished jobs leave server -> sink or next queue ---
+    for each Qs in systems:
+      for each server S with job J done (Tasks == []):
+        log EXITS-SERVER
+        if Qs has sink:
+          write sink wl (J.id, arrival=clock, Tasks=[])
+          log DEPART-VIA sink
+        else if Qs has edges_out:
+          peer = pick_edge(Qs.edges_out)     # equal weight if unspecified
+          peer.inbound_buffer.push(J)
+          log DEPART-VIA peer
+        else:
+          log ERROR NO-OUT-EDGE
+        clear S
+
+    # --- fill idle servers from waiting (still before admits) ---
+    for each Qs in systems:
+      fill_idle_servers_from_waiting(Qs)   # ENTERS-SERVER, TASK-START
+
+    # --- log metrics for every queue at this clock ---
+    for each Qs in systems:
+      write qmet(clock, Qs.id, |waiting|, |in_service|, errors)
+
+    clock++
+    continue
+
+  # --- 3. ACCEPT: arrivals due at this clock (sources + edge buffers) ---
+  for each Qs in systems:
+    while Qs.source has job J with J.arrival == clock:
+      J = Qs.source.pop()
+      if Qs.waiting is full:
+        log ERROR QUEUE-FULL
+      else:
+        Qs.waiting.push(J)
+        log ARRIVE-VIA source
+
+    while Qs.inbound_buffer not empty:
+      J = Qs.inbound_buffer.pop()
+      if Qs.waiting is full:
+        log ERROR QUEUE-FULL
+      else:
+        Qs.waiting.push(J)
+        log ARRIVE-VIA edge
+
+    fill_idle_servers_from_waiting(Qs)
+
+# --- I/O / logging (all queues) ---
+# inputs:  per-QS source .wl (config Source column); edge buffers between QS
+# outputs: per-QS sink .wl (config Sink column)
+# logging: one event log for all QS; one qmet.csv with a row per (clock, QS)
