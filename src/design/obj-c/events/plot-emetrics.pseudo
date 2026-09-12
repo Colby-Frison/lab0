@@ -1,0 +1,23 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+function plot_event_metrics(emetric_csv, output_image):
+    df = pd.read_csv(emetric_csv)
+    fig, (ax1, ax2) = plt.subplots(2, 1, ...)
+    
+    // Collect all unique queue IDs
+    unique_queues = df['Queue-sys-id'].unique()
+    
+    for queue_id in unique_queues:
+        q_data = df[df['Queue-sys-id'] == queue_id]
+        
+        // Histogram
+        ax1.hist(q_data['arrival-time'], bins=25,alpha=0.5, ...)
+        // Scatter plot
+        ax2.scatter(q_data['arrival-time'], q_data['response-time'], ...)
+
+    // Plot customizations here...
+    
+    savefig(output_image)
+
+plot_event_metrics('emetric.csv')

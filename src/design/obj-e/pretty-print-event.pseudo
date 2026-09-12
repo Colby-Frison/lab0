@@ -1,0 +1,67 @@
+output_dir = "..."
+create_directory_if_not_exists(output_dir)
+output_file = join_path(output_dir, 'pp-events.txt')
+
+COLORS = {
+            "ARRIVE-VIA": "ANSI_CODE",
+            "TASK-START": "ANSI_CODE",
+            "TASK-END": "ANSI_CODE",
+            ...,
+            "RESET": "ANSI_RESET_CODE"
+        }
+
+// Color code adds ANSI sequences to event strings; helper function to remove them
+function strip_ansi(text):
+    return regex_remove_ansi_escape_codes(text)
+
+// Parse log data and group events by time step, then by queue
+queues = get_sorted_unique_queues(log_data)
+columns = ["Time"] + queues
+grouped_events = initialize_nested_dictionary() // grouped_events[time_step][queue_id] = list of events
+
+for row in log_data:
+    colored_event_string = format_with_color(row.Job_ID, row.Event, row.Details, COLORS)
+    grouped_events[row.Time][row.Queue].append(colored_event_string)
+
+// Calculate dynamic column widths based on visible text length
+col_widths = initialize_widths_to_header_lengths(columns)
+
+for time_step, queues_dict in grouped_events:
+    col_widths["Time"] = max(col_widths["Time"], length(string(time_step)))
+    
+    for queue_id, events in queues_dict:
+        for event in events:
+            visible_length = length(strip_ansi(event))
+            col_widths[queue_id] = max(col_widths[queue_id], visible_length)
+
+// Generate padded terminal log
+open_file_for_writing(output_file) as f:
+    write_header_and_separator(f, columns, col_widths)
+    
+    for time_step in get_sorted_keys(grouped_events):
+        max_events_at_time = get_max_events_across_all_queues(grouped_events[time_step])
+        
+        for i in range(max_events_at_time):
+            // Only show the time step on the first sub-row
+            time_val = string(time_step) if i == 0 else ""
+            line_parts = [pad_string(time_val, col_widths["Time"])]
+            
+            for queue_id in queues:
+                if i < length(grouped_events[time_step][queue_id]):
+                    colored_text = grouped_events[time_step][queue_id][i]
+                else:
+                    colored_text = ""
+                    
+                // Apply padding based on visible length to maintain alignment
+                visible_len = length(strip_ansi(colored_text))
+                padding = generate_spaces(col_widths[queue_id] - visible_len)
+                
+                line_parts.append(colored_text + padding)
+                
+            write_line_to_file(f, join(line_parts, separator=" | "))
+
+// Automatically display formatted log
+try:
+    execute_system_command(["less", "-R", output_file])
+except KeyboardInterrupt:
+    pass

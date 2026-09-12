@@ -1,0 +1,32 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+function plot_use_metrics(csv_filename):
+    // Assuming header format: time-step,Utilization(10),...,Saturation(10),...,Errors(10),...
+    df = pd.read_csv(csv_filename)
+    
+    // Plots
+    fig, (ax1, ax2, ax3) = plt.subplots(3, 1, ...)
+    time = df['time-step']
+
+    // Utilization
+    ax1.plot(time, df['Utilization(10)'], ...)
+    ax1.plot(time, df['Utilization(100)'], ...)
+    ax1.plot(time, df['Utilization(1000)'], ...)
+    // Plot customizations here...
+
+    // Saturation
+    ax2.plot(time, df['Saturation(10)'], ...)
+    ax2.plot(time, df['Saturation(100)'], ...)
+    ax2.plot(time, df['Saturation(1000)'], ...)
+    // Plot customizations here...
+
+    // Errors
+    ax3.plot(time, df['Errors(10)'], ...)
+    ax3.plot(time, df['Errors(100)'], ...)
+    ax3.plot(time, df['Errors(1000)'], ...)
+    // Plot customizations here...
+
+    savefig('use_metrics.png')
+
+plot_use_metrics('quse.csv')

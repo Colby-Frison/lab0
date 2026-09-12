@@ -1,0 +1,55 @@
+import numpy as np
+import csv
+
+function compute_system_metrics(input_log, output_csv):
+    job_arrivals = {}
+    // Format: { departure_time_step: [response_time1, response_time2, ...] }
+    system_departures = {}
+
+    with input_log:
+        for line in input_log:
+            tokens = line.split()
+            
+            // Assuming format: <time> <job_id> IN <queue_id> <event_type> ...
+            time_step = int(tokens[0])
+            job_id = tokens[1]
+            event_type = tokens[4]
+            
+            // Extract sink file
+            dest = tokens[5] if len(tokens) > 5 else ""
+            
+            // Record initial entry time
+            if event_type == 'ARRIVE-VIA' and job_id not in job_arrivals:
+                job_arrivals[job_id] = time_step
+            
+            // Record exit and response times
+            else if event_type == 'DEPART-VIA' and '.wl' in dest:
+                if job_id in job_arrivals:
+                    arrival_time = job_arrivals[job_id]
+                    response_time = time_step - arrival_time
+                    
+                    if time_step not in system_departures:
+                        system_departures[time_step] = [] 
+                    system_departures[time_step].append(response_time)
+
+                    // If job re-enters queue, treat as a new arrival
+                    delete job_arrivals[job_id]
+
+    with output_csv:
+        writer = csv.writer(output_csv)
+        writer.writerow(['time-step', 'Avg-response-time', 'median-response-time', 
+                         '10-response-time', '90-response-time', 'throughput'])
+        
+        for t in sorted(system_departures.keys()):
+            latencies = system_departures[t]
+            
+            throughput = len(latencies)
+            avg_res = np.mean(latencies)
+            median_res = np.median(latencies)
+            p10_res = np.percentile(latencies, 10)
+            p90_res = np.percentile(latencies, 90)
+            
+            writer.writerow([t, f"{avg_res:.2f}", f"{median_res:.2f}", 
+                             f"{p10_res:.2f}", f"{p90_res:.2f}", throughput])
+
+compute_system_metrics('events.log', 'sysmetric.csv')

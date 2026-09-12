@@ -1,0 +1,62 @@
+events = []
+job_time_bounds = {} // Track first and last time step for each job
+
+log_rows = read_and_parse_file("event_log.log")
+
+for row in log_rows:
+    job = row.job_id
+    event = row.event_type
+    time = row.timestamp
+    events.append({"Job": job, "Time": time, "Event": event})
+    
+    // Update min/max time for job's horizontal lifeline
+    if job not in job_time_bounds:
+        job_time_bounds[job] = {"start": time, "end": time}
+    else:
+        job_time_bounds[job]["start"] = min(job_time_bounds[job]["start"], time)
+        job_time_bounds[job]["end"] = max(job_time_bounds[job]["end"], time)
+
+plot = initialize_chart()
+unique_jobs = extract_unique_jobs(events) 
+y_axis_positions = map_jobs_to_y_coordinates(unique_jobs)
+
+marker_config = {
+    "ARRIVE":      {"shape": "circle",   "color": "blue"},
+    "TASK-START":  {"shape": "triangle", "color": "orange"},
+    "EXIT-SERVER": {"shape": "square",   "color": "green"},
+    "DEPART-VIA":  {"shape": "star",     "color": "purple"}
+}
+
+for job, bounds in job_time_bounds.items():
+    y_pos = y_axis_positions[job]
+    
+    plot.draw_line(
+        x_start = bounds["start"],
+        x_end = bounds["end"],
+        y = y_pos,
+        color = "gray",
+        style = "solid",
+        z_index = 1 // Ensure lines draw behind markers
+    )
+
+// Render markers
+for ev in events:
+    if ev["Event"] in marker_config:
+        y_pos = y_axis_positions[ev["Job"]]
+        style = marker_config[ev["Event"]]
+        
+        plot.draw_scatter_marker(
+            x = ev["Time"],
+            y = y_pos,
+            marker_shape = style["shape"],
+            marker_color = style["color"],
+            size = large_marker_size,
+            z_index = 2 // Ensure markers draw above lines
+        )
+
+plot.set_x_axis_label("Time Step")
+plot.set_y_axis_ticks(y_axis_positions)
+plot.set_title("Event Trace Plot: Job Lifecycle")
+plot.enable_gridlines(style="dashed", opacity=0.3)
+plot.add_legend(marker_config, position="center right")
+plot.save_image("etrace-plot.png")
