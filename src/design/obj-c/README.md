@@ -41,7 +41,17 @@ Used for event metrics, job lifecycle tracing, and pretty-printing. Follows the 
 
 ## Tooling Architecture
 
-Build Obj C as a suite of modular Python scripts or a single CLI with subcommands.
+```mermaid
+flowchart TB
+  subgraph sim_env ["Simulator Environment"]
+    sim["Simulator Core"]
+    use_logic["USE Logic (Post-Sim)"]
+    sim --> use_logic
+  end
+  sim --> qmet[/"qmet.csv"/]
+  sim --> events[/"events.log"/]
+  use_logic --> quse[/"quse.csv"/]
+```
 
 ```mermaid
 flowchart LR
