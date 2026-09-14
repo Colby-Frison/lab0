@@ -54,20 +54,43 @@ flowchart TB
 ```
 
 ```mermaid
-flowchart LR
-  qmet["qmet.csv"] --> parser
-  events["job.log"] --> parser
-
-  subgraph objc ["Obj C Analysis Pipeline"]
-    direction TB
-    parser["Log Parsers"] --> filters["Filters"]
-    filters --> use["USE Metrics Calculator"]
-    filters --> sys_metrics["System & Event Metrics"]
-    filters --> trace["Event Tracing (Plotter)"]
-    filters --> pp["Pretty Printer"]
+flowchart TB
+  subgraph inputs ["Inputs (From Simulator)"]
+    direction LR
+    quse[/"quse.csv"/]
+    qmet[/"qmet.csv"/]
+    events[/"events.log"/]
   end
 
-  use --> out_metrics["metrics_report.txt"]
-  sys_metrics --> out_metrics
-  trace --> out_png["etrace-plot.png"]
-  pp --> out_term["pp-events.txt"]
+  subgraph objc ["Objective C Analysis Tools"]
+    direction TB
+    
+    %% USE Pipeline
+    quse --> plot_use["plot-use"]
+    plot_use --> quse_png[/"quse.png"/]
+
+    %% Qmet Pipeline
+    qmet --> filter_queue["filter-by-queue (w/ Queue ID)"]
+    filter_queue --> qX[/"qX_metrics.csv"/]
+
+    %% Events Pipeline (Filters)
+    events --> filter_job["filter-by-job (w/ Job ID)"]
+    filter_job --> jX[/"jX_events.log"/]
+
+    %% Events Pipeline (System Metrics)
+    events --> derive_sys["derive-sysmetrics"]
+    derive_sys --> sys_csv[/"sysmetrics.csv"/]
+    sys_csv --> plot_sys["plot-derive-sysmetrics"]
+    plot_sys --> resplot[/"resplot.png"/]
+
+    %% Events Pipeline (Event Metrics)
+    events --> derive_e["derive-emetrics"]
+    derive_e --> e_csv[/"emetrics.csv"/]
+    e_csv --> plot_e["plot-emetrics"]
+    plot_e --> emetrics_png[/"emetrics.png"/]
+
+    %% Events Pipeline (Tracing)
+    events --> create_etrace["create-etrace"]
+    create_etrace --> etrace_png[/"etrace.png"/]
+  end
+```
