@@ -1,0 +1,14 @@
+function visualize(path, mode, columns, bins, style, out):
+    df = pandas.read_csv(path)
+    df["len(Tasks)"] = df["Tasks"].map(parse_task_list).map(len)
+
+    if mode == hist:
+        col = columns[0]          # e.g. "arrival time"
+        ax = df[col].plot.hist(bins=bins)
+        # optional: one bin per time step if bins == unique arrivals
+    else:  # scatter
+        x, y = columns[0], columns[1]
+        ax = df.plot.scatter(x=x, y=y)
+
+    apply style (title, xlim, ylim)
+    savefig(out)

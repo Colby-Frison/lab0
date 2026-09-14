@@ -1,0 +1,23 @@
+function generate_workload(interval, dist, stats, task_mode, fixed_task_opts, seed):
+    rng = seeded RNG(seed)
+    jobs = []
+    next_id = 0
+
+    for t in time_steps(interval):
+        n_jobs = draw_nonneg_int(rng, dist, stats)   # jobs arriving at t
+
+        for _ in 1..n_jobs:
+            if task_mode == fixed:
+                n_tasks = fixed_task_opts.k
+                works   = [fixed_task_opts.w] * n_tasks
+            else:
+                n_tasks = max(1, draw_nonneg_int(rng, dist, stats))
+                works   = [max(1, draw_nonneg_int(rng, dist, stats))
+                           for _ in 1..n_tasks]
+
+            tasks = [f"{tid}: W {works[tid]}" for tid in 0..n_tasks-1]
+            jobs.append({ id: f"j{next_id}", arrival: t, Tasks: tasks })
+            next_id += 1
+
+    sort jobs by (arrival, id)
+    write CSV(jobs)

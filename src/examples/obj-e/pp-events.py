@@ -93,6 +93,7 @@ with open(output_file, 'w') as f:
                 line_parts.append(colored_text + padding)
                 
             f.write(" | ".join(line_parts) + "\n")
+        f.write("-" * len(header) + "\n")
 
 try:
     subprocess.run(["less", "-R", output_file])
