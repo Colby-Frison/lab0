@@ -1,77 +1,99 @@
 # Objective B — Simple Queue Simulator (outline)
-# Driven by remaining work (input + in-system jobs), not a fixed time_limit.
-# Per clock advance: serve -> move -> admit.
-# Full design: ../../design/obj-b/README.md
-#
-# From temp.psuedocode: when next arrival is in the future, tick the clock
-# (serve/move/fill); when arrival == clock, accept into the queue.
+# Driven by remaining work, with an optional safety limit.
+# One complete pass per clock: serve -> move -> fill -> admit -> fill -> record.
+# Design: src/design/obj-b/README.md
 
 # --- State ---
 clock = 0
 systems = load_config()              # list of QueueSystems (Obj B: one; Obj E: many)
-# Each QS: waiting queue, servers[], source?, sink?, edges_in/out, inbound_buffer
+# Each QS: streaming source (one-row lookahead), waiting queue, servers[],
+#          service_plan, persistent sink writer,
+#          edges in/out, current_transfers, next_transfers
 # Global: shared event log, shared qmet writer
-# Inputs: each QS.source is a sorted job stream; plus edge buffers between queues
+# Transfer: { job, from_qsid, to_qsid, available_time }
 
 # Work remains while any source has jobs, any waiting queue nonempty,
-# any server busy, or any inbound_buffer nonempty.
-while work_remaining(systems):
+# any server is busy, or any current/next transfer buffer is nonempty.
+# MAIN LOOP: exactly one pass per clock value.
+while work_remaining(systems) and not safety_limit_reached(clock):
+  reset errors_this_step for every Qs
 
-  # If no source job is due at this clock, advance time and process in-system work.
-  if no_arrival_due_at(clock, systems):
-    # --- 1. SERVE: progress jobs already in servers ---
-    for each Qs in systems:
-      for each busy server S in Qs:
-        decrease S remaining / apply server function at rate
-        log TASK-END / TASK-START when task boundaries change
+  # 1. SERVE jobs that entered service before this clock.
+  for each Qs in systems:
+    for each busy server S in Qs:
+      decrement S.rate_timer by 1
+      if S.rate_timer == 0:
+        apply next function in S.service_plan
+        log TASK-END / TASK-START when the front task changes
+        update S.chain_index / repeat policy
+        set S.visit_complete when the service plan is finished
+        reset S.rate_timer when more service is required
 
-    # --- 2. MOVE: finished jobs leave server -> sink or next queue ---
-    for each Qs in systems:
-      for each server S with job J done (Tasks == []):
-        log EXITS-SERVER
-        if Qs has sink:
-          write sink wl (J.id, arrival=clock, Tasks=[])
-          log DEPART-VIA sink
-        else if Qs has edges_out:
-          peer = pick_edge(Qs.edges_out)     # equal weight if unspecified
-          peer.inbound_buffer.push(J)
-          log DEPART-VIA peer
-        else:
-          log ERROR NO-OUT-EDGE
-        clear S
+  # 2. MOVE all service-visit-complete jobs.
+  for each Qs in systems:
+    for each server S where S.visit_complete:
+      J = S.job
+      log EXITS-SERVER
+      if J.Tasks == [] and Qs has sink:
+        write sink wl (J.id, arrival=clock, Tasks=[])
+        log DEPART-VIA sink
+      else if Qs has edges_out:
+        edge = deterministic_weighted_pick(Qs.edges_out)
+        stage Transfer(J, Qs.id, edge.target, available_time=clock+1)
+        log DEPART-VIA edge
+      else:
+        drop J
+        log ERROR NO-OUT-EDGE
+        Qs.errors_this_step++
+      clear S
 
-    # --- fill idle servers from waiting (still before admits) ---
-    for each Qs in systems:
-      fill_idle_servers_from_waiting(Qs)   # ENTERS-SERVER, TASK-START
+  # 3. FILL from jobs already waiting (FCFS / work-conserving).
+  for each Qs in systems:
+    fill_idle_servers_from_waiting(Qs)
 
-    # --- log metrics for every queue at this clock ---
-    for each Qs in systems:
-      write qmet(clock, Qs.id, |waiting|, |in_service|, errors)
-
-    clock++
-    continue
-
-  # --- 3. ACCEPT: arrivals due at this clock (sources + edge buffers) ---
+  # 4. ADMIT all source/transfer arrivals due now.
   for each Qs in systems:
     while Qs.source has job J with J.arrival == clock:
       J = Qs.source.pop()
-      if Qs.waiting is full:
-        log ERROR QUEUE-FULL
+      J.queue_arrival_time = clock
+      log ARRIVE-VIA source
+      if Qs has idle server:
+        start J immediately             # ENTERS-SERVER, TASK-START
+      else if Qs.waiting is not full:
+        Qs.waiting.push_back(J)
       else:
-        Qs.waiting.push(J)
-        log ARRIVE-VIA source
-
-    while Qs.inbound_buffer not empty:
-      J = Qs.inbound_buffer.pop()
-      if Qs.waiting is full:
+        drop J
         log ERROR QUEUE-FULL
-      else:
-        Qs.waiting.push(J)
-        log ARRIVE-VIA edge
+        Qs.errors_this_step++
 
+    while Qs.current_transfers.front.available_time == clock:
+      transfer = Qs.current_transfers.pop_front()
+      J = transfer.job
+      J.queue_arrival_time = clock
+      log ARRIVE-VIA transfer.from_qsid
+      if Qs has idle server:
+        start J immediately             # ENTERS-SERVER, TASK-START
+      else if Qs.waiting is not full:
+        Qs.waiting.push_back(J)
+      else:
+        drop J
+        log ERROR QUEUE-FULL
+        Qs.errors_this_step++
+
+  # 5. FILL again as an invariant check (normally handled during admission).
+  for each Qs in systems:
     fill_idle_servers_from_waiting(Qs)
+
+  # 6. RECORD dense metrics and advance exactly once.
+  for each Qs in systems:
+    write qmet(clock, Qs.id, |waiting|, |in_service|, errors_this_step)
+
+  commit next_transfers as next clock's current_transfers
+  clock++
 
 # --- I/O / logging (all queues) ---
 # inputs:  per-QS source .wl (config Source column); edge buffers between QS
 # outputs: per-QS sink .wl (config Sink column)
 # logging: one event log for all QS; one qmet.csv with a row per (clock, QS)
+# safe optimization: jump over a fully idle gap only, while still emitting the
+# required zero-state qmet rows for each skipped time.
