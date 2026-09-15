@@ -137,12 +137,16 @@ PDF sample assumes **Sub-10\*** — Sub-10 applied 0 or more times until tasks a
 
 Build Obj B as a **network of size 1**, not a hard-coded single queue class.
 
-```text
-[config.csv] ──► Simulator ──► vector<QueueSystem>
-                     │
-                     ├─► qmet.csv
-                     ├─► event log
-                     └─► sink workload(s) via each QS
+```mermaid
+flowchart LR
+  config["Queue config CSV"] --> sim["Simulator"]
+  sources["Sorted source workloads"] --> sim
+  sim --> systems["QueueSystem collection"]
+  systems --> sinks["Per-queue sink workloads"]
+  systems --> transfers["Staged inter-queue transfers"]
+  transfers --> systems
+  sim --> qmet["Shared qmet.csv"]
+  sim --> events["Shared event log"]
 ```
 
 Later Obj E adds more `QueueSystem` nodes and routes `DEPART` along edges (equal weight if unspecified) instead of only to a sink.
@@ -151,58 +155,102 @@ Later Obj E adds more `QueueSystem` nodes and routes `DEPART` along edges (equal
 
 | Type | Responsibility |
 |------|----------------|
-| `Job` | id, task list, bookkeeping (e.g. time entered current QS) |
+| `Job` | id, original source arrival, current-queue arrival, task list |
 | Task helpers | parse/format `"tid: W N"` |
-| `ServerFunction` | `TaskList apply(TaskList)`; `SubX`, chain wrapper |
-| `Server` | optional job in service; progress / timer toward next function application at `rate` |
-| `QueueSystem` | id, max size, waiting deque, servers, fn+rate, source/sink paths, edges in/out, error counter, inbound edge buffer |
+| `ServicePlan` / `ServerFunction` | ordered functions, `*` repeat policy, and pure `SubX` task mutation |
+| `Server` | optional job, rate timer, function index, service-visit-complete state |
+| `Transfer` | job, source/target queue ids, and the time it becomes admissible |
+| `QueueSystem` | id, max size, FCFS waiting deque, servers, service plan, source/sink, weighted edges, current/next transfer buffers, per-step errors |
 | `Simulator` | load config → systems; global clock; tick loop; orchestrate routing |
-| `WorkloadIO` | read/write Obj A CSV |
+| `SourceStream` / `SinkWriter` | one-row-lookahead source reads and persistent sink writes using Obj A CSV |
 | `EventLog` / `MetricsWriter` | event lines + qmet rows |
 
 **Key rule:** all “how a queue works” logic lives in `QueueSystem` + the PDF tick order in `Simulator`. Obj E should extend routing and config size, not fork a second simulator.
 
 ---
 
-## Main loop (input-driven; serve → move → admit)
+## Main loop (input-driven; one complete pass per clock)
 
-Loop while **work remains** (source jobs left, waiting queues nonempty, servers busy, or edge buffers nonempty) — not a fixed `time_limit`. Clock still advances one step at a time; termination is driven by draining inputs and in-system jobs (same idea as `temp.psuedocode`).
+Loop while **work remains** (source jobs, waiting jobs, busy servers, or staged
+transfers), with `--limit` only as a safety guard. Each clock value is handled
+exactly once. This avoids the previous two-branch design, which could admit a
+new job before recording a same-time service completion.
 
-Within a clock advance (when the next arrival is still in the future):
+The canonical order is:
 
-1. **Serve** — progress jobs already in servers (rate / server function; TASK-END/START)
-2. **Move** — finished jobs (`Tasks == []`) exit server → sink file or next queue’s inbound buffer (DEPART-VIA / ERROR NO-OUT-EDGE); then fill idle servers from waiting
-3. Write **qmet** for every queue system at this clock, then `clock++`
-
-When arrivals are due at `clock`:
-
-3. **Admit** — pull from each QS source and from inbound edge buffers into that QS waiting queue (ARRIVE-VIA / ERROR QUEUE-FULL); fill idle servers
+1. **Serve** jobs already in service for one unit of simulated time.
+2. **Move** every completed service visit: a done job goes to its sink when
+   present; otherwise any visit-complete job follows a staged outgoing edge.
+   No valid destination is an error.
+3. **Fill** idle servers from the existing FCFS waiting queues.
+4. **Admit** all source arrivals and transfers available at this time. After
+   older waiting jobs have been dispatched, a new job uses any remaining idle
+   server; otherwise it joins the waiting tail or is rejected with
+   `QUEUE-FULL`.
+5. **Fill again** so a new arrival can start immediately.
+6. **Record** one qmet row per queue, commit transfers for the next time, and
+   increment the clock.
 
 ```text
 clock = 0
 systems = load_config()   # one QS for Obj B; many for Obj E
 
-while work_remaining(systems):
-  if no_arrival_due_at(clock, systems):
-    for each Qs: serve busy servers
-    for each Qs: move finished jobs to sink or edges_out
-    for each Qs: fill idle servers from waiting
-    for each Qs: write qmet(clock, Qs, ...)
-    clock++
-    continue
+while work_remaining(systems):          # <-- main loop
+  if --limit hit: break
 
-  for each Qs:
-    admit source jobs with arrival == clock
-    admit jobs from inbound_buffer          # Obj E; empty on Obj B
-    fill idle servers from waiting
+  reset per-step errors
+  serve all busy servers
+  move every service-visit-complete job
+    if Tasks == [] and sink exists: write sink
+    else if edges_out exists: stage transfer for clock + 1
+    else: ERROR NO-OUT-EDGE
+  fill idle servers from existing waiting jobs
+  admit every source job and available transfer due at clock
+  fill idle servers again
+  write qmet row for every queue
+  commit next-step transfers
+  clock++
 ```
+
+See `implementation/obj-b/simple-queue-sim/README.md` for the full flowchart
+plus efficiency (dense time, safe idle jumps, deques, maps) and queueing-theory
+(FCFS, work-conserving, Little's Law, utilization, loss buffers) notes.
+
+### Timing invariants
+
+- Existing service events precede arrivals with the same timestamp.
+- Transfers departing at $t$ become available to the target at $t+1$, so
+  results do not depend on queue iteration order.
+- Queue capacity counts waiting jobs only; in-service jobs are separate.
+- qmet errors are per-step dropped jobs and reset after emission.
+- One dense qmet row per `(time-step, queue-sys-id)` is required for Obj C's
+  10/100/1000-step USE windows.
+- Service-visit completion is distinct from job completion (`Tasks == []`).
+  `Sub-10*` repeats until done; a non-repeating stage can forward remaining
+  work to another queue.
+
+### Efficiency and analysis constraints
+
+- Use deques for O(1) FCFS admission/dispatch and a queue-id hash map for O(1)
+  routing.
+- Never rescan a source workload; consume its sorted front cursor.
+- Dense qmet imposes an unavoidable $\Omega(QT)$ output cost. A clock jump is
+  safe only across a fully idle gap and must still synthesize required qmet
+  rows.
+- Preserve original and per-queue arrival times so Obj C can derive queue
+  response/turnaround and system latency/throughput.
+- Sections D/F require comparable sensitivity studies. Weighted routing must
+  therefore be deterministic (weighted round-robin) or explicitly seeded.
+- For stable intervals, validate measurements with Little's Law
+  $L \approx \lambda W$; report warm-up and drain intervals separately from
+  steady state.
 
 ### Multi-queue I/O and logging
 
 | Concern | How |
 |---------|-----|
-| Input | Per-QS `Source` workload (sorted); plus `inbound_buffer` fed by upstream DEPART |
-| Output | Per-QS `Sink` workload (empty `Tasks`, departure time in arrival column) |
+| Input | Per-QS sorted `SourceStream` with one-row lookahead; plus staged transfers from upstream DEPART |
+| Output | Persistent per-QS `SinkWriter` (empty `Tasks`, departure time in arrival column) |
 | Events | **One** shared event log; every line includes `qsid` so filters work across the network |
 | Metrics | **One** `qmet.csv`; one row per `(clock, queue-sys-id)` for all systems |
 
@@ -236,7 +284,8 @@ time-step,queue-sys-id,num-jobs-in-queue,num-jobs-in-service,num-of-errors
 
 - `num-jobs-in-queue` — waiting (saturation / L)
 - `num-jobs-in-service` — occupied servers
-- `num-of-errors` — drops this step (or cumulative per PDF examples — match example files when implementing; document choice in impl README)
+- `num-of-errors` — jobs dropped by this queue during this time step; reset
+  after the row is emitted
 
 ### Event log
 
@@ -298,11 +347,12 @@ simple-queue-sim/
   README.md               # build + run
   src/
     main.cpp              # CLI
+    config_io.hpp/.cpp    # qconf CSV + weighted edges
     job.hpp / job.cpp
-    server_function.hpp/.cpp   # Sub-X + "Sub-5,Sub-10" chain
+    server_function.hpp/.cpp   # ServicePlan, Sub-X, chains, * repeat
     queue_system.hpp/.cpp
     simulator.hpp/.cpp
-    workload_io.hpp/.cpp       # Obj A CSV
+    workload_io.hpp/.cpp       # streaming Obj A sources / persistent sinks
     event_log.hpp/.cpp
     metrics_writer.hpp/.cpp    # qmet.csv
 ```
@@ -334,9 +384,12 @@ Source/sink paths come from the config columns (relative to cwd), matching examp
 - [ ] Loads config CSV; builds ≥1 `QueueSystem` (Obj B: one row)
 - [ ] Reads Obj A source workload; writes sink workload with empty `Tasks`
 - [ ] Discrete clock; loop until inputs/in-system work drain; serve → move → admit
-- [ ] Applies `Sub-X` (and documents rate behavior) on jobs in service
+- [ ] Applies `Sub-X`, chains, and `*` repeat semantics at the configured rate
 - [ ] Emits `qmet.csv` and event log matching lab token formats
 - [ ] Reports `QUEUE-FULL` when waiting queue cannot accept an arrival
+- [ ] Distinguishes service-visit completion from `Tasks == []`
+- [ ] Stages inter-queue transfers for deterministic $t+1$ admission
+- [ ] Preserves original and per-queue arrival timestamps for Obj C metrics
 - [ ] Types/structure leave room for N systems + edges (no single-queue-only dead ends)
 
 ---
