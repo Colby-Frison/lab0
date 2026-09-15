@@ -31,8 +31,12 @@ class Simulator {
   void serve_all();
   void move_all();    // includes sink write + weighted edge routing via id_to_index_
   void admit_all();   // sources + inbound_buffers
-  void fill_all();
+  void fill_all();    // work-conserving: never idle while waiting nonempty
   void write_metrics();
+
+  // Efficiency: jump to min(next source arrival, earliest server rate expiry)
+  // when advancing time; use clock++ only if dense per-tick qmet is required.
+  int next_event_time() const;
 
   QueueSystem* find_system(const std::string& id);
   Edge pick_outgoing_edge(const QueueSystem& qs) const;  // by weight; equal if unspecified

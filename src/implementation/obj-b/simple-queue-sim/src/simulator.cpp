@@ -33,6 +33,11 @@ void Simulator::admit_all() {}
 void Simulator::fill_all() {}
 void Simulator::write_metrics() {}
 
+int Simulator::next_event_time() const {
+  // TODO: min over next source arrival and busy servers' rate_timer deadlines
+  return clock_ + 1;
+}
+
 QueueSystem* Simulator::find_system(const std::string& /*id*/) { return nullptr; }
 
 Edge Simulator::pick_outgoing_edge(const QueueSystem& qs) const {
