@@ -1,0 +1,55 @@
+history_busy = []
+history_qlen = []
+history_errors = []
+
+function log_state(server_busy_status, current_queue_length, drops_in_this_step):
+    // Record for current time step
+    history_busy.append(1 if server_busy_status else 0)
+    history_qlen.append(current_queue_length)
+    history_errors.append(drops_in_this_step)
+    
+    // Maintain max sliding window size
+    if len(history_busy) > 1000:
+        history_busy.pop(0)
+        history_qlen.pop(0)
+        history_errors.pop(0)
+
+function compute_USE(window_size):
+    // Grab only the last 10/100/1000
+    window_busy = history_busy[-window_size:]
+    window_qlen = history_qlen[-window_size:]
+    window_errors = history_errors[-window_size:]
+    
+    n = len(window_busy)
+    if n == 0:
+        return 0.0, 0.0, 0
+        
+    utilization = sum(window_busy) / n
+    saturation = sum(window_qlen) / n
+    errors = sum(window_errors)
+    
+    return utilization, saturation, errors
+
+// Main
+for t in range(150):
+    drops_this_step = 0
+    
+    // Simulation logic here...
+    // If a job arrives and queue is full, drops_this_step += 1
+
+    // Determine state at end of time step 
+    server_is_busy = (q0_server_finish != -1)
+    current_q_len = len(q0_queue)
+    
+    // Log the state
+    log_state(server_is_busy, current_q_len, drops_this_step)
+    
+    // Compute USE metrics
+    u_10, s_10, e_10 = compute_USE(10)
+    u_100, s_100, e_100 = compute_USE(100)
+    u_1000, s_1000, e_1000 = compute_USE(1000)
+    
+    // Output to quse.csv here
+    print(f"{t},{u_10},{s_10},{e_10},{u_100},{s_100},{e_100},{u_1000},{s_1000},{e_1000}")
+
+    // Logic for other features here...

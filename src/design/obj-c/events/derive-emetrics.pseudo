@@ -1,0 +1,53 @@
+import csv
+
+function compute_event_metrics(input_log, output_csv):
+    // Track jobs currently inside queue
+    // Key: (job_id, queue_id), avoids collisions if same job enters same/multiple queues
+    // Value: { 'arrival': time, 'start': time }
+    jobs_in_queue = {}
+    
+    with input_log and output_csv:
+        writer = csv.writer(output_csv)
+        writer.writerow(['Job-id', 'Queue-sys-id', 'arrival-time', 
+                         'time-in-queue', 'time-in-service', 
+                         'response-time', 'turnaround-time'])
+        
+        for line in input_log:
+            tokens = line.split()
+            
+            // Assuming format: <time> <job_id> IN <queue_id> <event_type> ...
+            time_step = int(tokens[0])
+            job_id = tokens[1]
+            queue_id = tokens[3]
+            event_type = tokens[4]
+            
+            // Unique key for specific job in specific queue
+            tracking_key = (job_id, queue_id)
+            
+            // Job enters queue
+            if event_type == 'ARRIVE-VIA':
+                jobs_in_queue[tracking_key] = {'arrival': time_step, 'start': -1}
+                
+            // Job enters server
+            else if event_type == 'TASK-START' and tracking_key in jobs_in_queue:
+                jobs_in_queue[tracking_key]['start'] = time_step
+                    
+            // Job finishes (Lifecycle complete for this queue)
+            else if event_type == 'EXITS-SERVER' and tracking_key in jobs_in_queue:
+                t_arrive = jobs_in_queue[tracking_key]['arrival']
+                t_start = jobs_in_queue[tracking_key]['start']
+                t_exit = time_step
+                
+                time_in_queue = t_start - t_arrive
+                time_in_service = t_exit - t_start
+                response_time = time_in_queue
+                turnaround_time = t_exit - t_arrive
+
+                writer.writerow([job_id, queue_id, t_arrive, 
+                    time_in_queue, time_in_service, 
+                    response_time, turnaround_time])
+
+                // If job re-enters queue, treat as a new arrival
+                delete jobs_in_queue[tracking_key]
+
+compute_event_metrics('events.log', 'emetric.csv')

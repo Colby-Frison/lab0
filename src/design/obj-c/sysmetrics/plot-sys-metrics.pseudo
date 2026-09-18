@@ -1,0 +1,24 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+function plot_system_metrics(csv_filename, output_image):
+    df = pd.read_csv(csv_filename)
+    
+    fig, (ax1, ax2) = plt.subplots(2, 1, ...)
+    time = df['time-step']
+    
+    // Latency
+    // Shade area between 10-90th percentile for variance
+    ax1.fill_between(time, df['10-response-time'], df['90-response-time'], ...)
+    ax1.plot(time, df['median-response-time'], ...)
+    ax1.plot(time, df['Avg-response-time'], ...)
+    // Plot customizations here...
+    
+    // Throughput
+    ax2.plot(time, df['throughput'], ...)
+    ax2.fill_between(time, df['throughput'], ...)
+    // Plot customizations here...
+    
+    savefig(output_image)
+
+plot_system_metrics('sysmetric.csv')

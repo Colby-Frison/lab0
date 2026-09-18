@@ -1,0 +1,10 @@
+import pandas as pd
+
+function filter_by_queue(qmetin_csv, qmetout_csv, target_queue):
+    df = pd.read_csv(qmetin_csv)
+    
+    // Assumes header format: time-step,queue-sys-id,...
+    filtered_df = df[df['queue-sys-id'] == target_queue]
+    filtered_df.to_csv(qmetout_csv, index=False)
+
+filter_by_queue('qmet-single.csv', 'q0_metrics.csv', 'q0')
