@@ -2,23 +2,15 @@
 
 C++ discrete-time **simple queue simulator**.
 
-- Simulator scaffold: [`simple-queue-sim/`](simple-queue-sim/) (see its README for file responsibilities)
+- Outline / architecture: [`simple-queue-sim/`](simple-queue-sim/) (flowchart, UML, file responsibilities)
 - Design / algorithm: [`src/design/obj-b/README.md`](../../design/obj-b/README.md)
-- Pseudocode: [`obj_b.pseudocode`](obj_b.pseudocode) (input-driven; serve → move → admit)
+- Pseudocode: [`obj_b.pseudocode`](obj_b.pseudocode) (input-driven; serve → move → fill → admit → fill → record)
 
 ## Status
 
-Boilerplate C++ layout is in place under `simple-queue-sim/`. Logic stubs throw / no-op until implemented.
+Design and outline only. C++ sources will be added during implementation (not scaffolded yet).
 
-## Quick build
-
-```bash
-cd simple-queue-sim
-cmake -S . -B build
-cmake --build build
-```
-
-## CLI
+## Planned CLI
 
 ```text
 ./simple-queue-sim --config qconf.csv [--limit T] --qmet qmet.csv --events job.log

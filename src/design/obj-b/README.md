@@ -165,7 +165,7 @@ Later Obj E adds more `QueueSystem` nodes and routes `DEPART` along edges (equal
 | `SourceStream` / `SinkWriter` | one-row-lookahead source reads and persistent sink writes using Obj A CSV |
 | `EventLog` / `MetricsWriter` | event lines + qmet rows |
 
-**Key rule:** all “how a queue works” logic lives in `QueueSystem` + the PDF tick order in `Simulator`. Obj E should extend routing and config size, not fork a second simulator.
+**Key rule:** all “how a queue works” logic lives in `QueueSystem` + the canonical serve → move → fill → admit → fill → record order in `Simulator`. Obj E should extend routing and config size, not fork a second simulator.
 
 ---
 
@@ -260,11 +260,11 @@ Obj B is just `systems.size() == 1` with empty edges; Obj E reuses the same loop
 
 - `q_ex-1.py`: fixed `service_time`, single queue, `while clock < limit`
 - PDF p. 15 sketch: for-each-QS phases under a time limit (move → update → fill → admit)
-- **Our outline:** input-driven stop; **serve → move → admit**; task-list mutation via server functions; N queue systems from day one
+- **Our outline:** input-driven stop; **serve → move → fill → admit → fill → record**; task-list mutation via server functions; N queue systems from day one
 
 ### Pseudocode files
 
-- [`simple-queue-sim/simple-queue-sim.pseudo`](simple-queue-sim/simple-queue-sim.pseudo)
+- [`simple-queue-sim.pseudo`](simple-queue-sim.pseudo)
 - [`../../implementation/obj-b/obj_b.pseudocode`](../../implementation/obj-b/obj_b.pseudocode)
 
 ---
@@ -383,7 +383,7 @@ Source/sink paths come from the config columns (relative to cwd), matching examp
 
 - [ ] Loads config CSV; builds ≥1 `QueueSystem` (Obj B: one row)
 - [ ] Reads Obj A source workload; writes sink workload with empty `Tasks`
-- [ ] Discrete clock; loop until inputs/in-system work drain; serve → move → admit
+- [ ] Discrete clock; loop until inputs/in-system work drain; serve → move → fill → admit → fill → record
 - [ ] Applies `Sub-X`, chains, and `*` repeat semantics at the configured rate
 - [ ] Emits `qmet.csv` and event log matching lab token formats
 - [ ] Reports `QUEUE-FULL` when waiting queue cannot accept an arrival
