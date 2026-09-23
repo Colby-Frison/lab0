@@ -1,0 +1,2 @@
+Sys ID,Queue Max Size,Num. Servers,Server Function,Server Function Rate,Source,Sink,Edges in,Edges out
+q0,8,2,Sub-10*,10,tests/fixtures/multi_server/in0.wl,tests/fixtures/multi_server/out0.wl,[],[]

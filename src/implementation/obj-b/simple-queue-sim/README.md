@@ -1,21 +1,63 @@
 # Objective B — `simple-queue-sim`
 
-C++ discrete-time queue simulator (design / outline only).
+C++ discrete-time queue simulator.
 
 Design / algorithm: [`../../design/obj-b/README.md`](../../design/obj-b/README.md)  
 Pseudocode: [`../obj_b.pseudocode`](../obj_b.pseudocode)
 
 ## Status
 
-No C++ sources yet — this README is the target architecture (flowchart, UML, file responsibilities). Implementation will add `CMakeLists.txt` and `src/` later.
+Implemented. Canonical tick order: **serve → move → fill → admit → fill → record**. Emits `TASK-END` (not `TASK-STOP`). Network-ready (`vector<QueueSystem>` + staged transfers) with Obj B configs using one row.
 
-## Planned CLI
+## Build
+
+```bash
+cmake -S . -B build
+cmake --build build
+```
+
+Binary: `build/simple-queue-sim` (path may vary by generator).
+
+## Test
+
+```bash
+ctest --test-dir build --output-on-failure
+# or (Linux / Git Bash / WSL):
+./run-all-tests.sh
+# or (Windows PowerShell):
+.\run-all-tests.ps1
+```
+
+Coverage: Job/Sub-X/config unit tests; PDF walkthrough golden events+sink; `QUEUE-FULL`; multi-server; bare chain visit vs job-done; 2-node transfer smoke.
+
+## CLI
 
 ```text
 ./simple-queue-sim --config qconf.csv [--limit T] --qmet qmet.csv --events job.log
 ```
 
 Runs until sources and in-system work are drained (`--limit` is an optional safety cap). Source/sink paths come from the config CSV.
+
+### Quick run (existing workload)
+
+PowerShell (from `simple-queue-sim/`):
+
+```powershell
+.\scripts\run-existing.ps1
+.\scripts\run-existing.ps1 -Workload ..\..\..\examples\obj-a\wl-poisson.csv
+```
+
+Or build once and invoke the binary with a one-node config whose `Source` column points at any Obj A CSV.
+
+### Generate → visualize → simulate
+
+```powershell
+.\scripts\gen-viz-sim.ps1
+.\scripts\gen-viz-sim.ps1 -Interval 0:49 -Dist uniform -Seed 7
+```
+
+Bash/WSL equivalents: `scripts/run-existing.sh`, `scripts/gen-viz-sim.sh`.
+
 
 ## Simulator flowchart
 
@@ -127,7 +169,8 @@ Admission never bypasses an older waiting job: phase 3 first dispatches all exis
 
 ## Layout and file responsibilities
 
-How the pieces fit together (target UML class architecture). Files below are the intended `src/` layout for implementation; `ServicePlan`, `Transfer`, `SourceStream`, and `SinkWriter` are first-class design responsibilities:
+How the pieces fit together (UML class architecture). Implemented under `src/`;
+`ServicePlan`, `Transfer`, `SourceStream`, and `SinkWriter` are first-class types:
 
 ```mermaid
 classDiagram
