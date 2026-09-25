@@ -5,3 +5,4 @@ Documentation/local-notes/*
 **/tests/fixtures/**/out*.wl
 **/tests/fixtures/_tmp_config.csv
 **/runs/
+*pycache*/
