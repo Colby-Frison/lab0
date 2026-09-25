@@ -1,0 +1,2 @@
+scenario,title,study,level,total_servers,patients,completed,dropped,drop_pct,horizon_steps,drain_steps,throughput_per_step,los_mean,los_median,los_p10,los_p90,los_mean_min,los_p90_min,treatment_wait_mean,max_util_station,max_util,lab_util
+lab+1,+1 lab analyzer only,targeted,,25,2933,2908,25,0.85,1499,32,1.899,14.33,13.0,7.0,23.0,143.3,230.0,1.83,pod_a,0.849,0.357
