@@ -14,16 +14,20 @@ from pathlib import Path
 
 
 def repo_root() -> Path:
-    # .../src/implementation/obj-e/make-queue-inputs/make_queue_inputs.py
-    return Path(__file__).resolve().parents[4]
+    # .../src/implementation/obj-e/multi-queue-sim/tooling/make-queue-inputs/make_queue_inputs.py
+    return Path(__file__).resolve().parents[6]
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Write a workload (.wl) and multi-queue config (qconf.csv)."
     )
+
+    # Queue System Parameters
     parser.add_argument("--out-dir", required=True, help="Directory for in0.wl and qconf.csv")
     parser.add_argument("--queues", type=int, default=2, help="Number of queue systems (>= 1)")
+
+    # Workload Generator Parameters
     parser.add_argument("--interval", default="0:9", help="Inclusive START:END for the generator")
     parser.add_argument(
         "--dist",
@@ -41,6 +45,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--sigma", type=float, default=1.0)
     parser.add_argument("--p", type=float, default=0.4)
     parser.add_argument("--lam", type=float, default=1.5)
+
+    # Per-Queue Parameters
     parser.add_argument("--max-size", type=int, default=16)
     parser.add_argument("--servers", type=int, default=1)
     parser.add_argument("--sub", type=int, default=10, help="Sub-X amount")
