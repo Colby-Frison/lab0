@@ -18,7 +18,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
-$Maker = Join-Path $Root "..\make-queue-inputs\make_queue_inputs.py"
+$Maker = Join-Path $Root "tooling\make-queue-inputs\make_queue_inputs.py"
 if (-not $OutDir) {
   $OutDir = Join-Path $Root "runs\queue"
 }

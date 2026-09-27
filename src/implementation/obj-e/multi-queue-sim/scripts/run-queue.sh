@@ -7,7 +7,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-MAKER="$ROOT/../make-queue-inputs/make_queue_inputs.py"
+MAKER="$ROOT/tooling/make-queue-inputs/make_queue_inputs.py"
 OUT_DIR="${OUT_DIR:-$ROOT/runs/queue}"
 QUEUES="${QUEUES:-2}"
 INTERVAL="${INTERVAL:-0:9}"
