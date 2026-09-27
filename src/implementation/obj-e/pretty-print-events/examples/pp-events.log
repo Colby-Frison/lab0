@@ -1,0 +1,884 @@
+  0 [96mq0 j0 ARRIVE-VIA in0.wl       [0m
+    [93mq0 j0 ENTERS-SERVER 0         [0m
+    [92mq0 j0 TASK-START 0 "W 2"      [0m
+    [96mq0 j1 ARRIVE-VIA in0.wl       [0m
+    [93mq0 j1 ENTERS-SERVER 1         [0m
+    [92mq0 j1 TASK-START 0 "W 1"      [0m
+  1 [96mq0 j2 ARRIVE-VIA in0.wl       [0m
+    [96mq0 j3 ARRIVE-VIA in0.wl       [0m
+  2 [96mq0 j4 ARRIVE-VIA in0.wl       [0m
+  3 [96mq0 j5 ARRIVE-VIA in0.wl       [0m
+    [96mq0 j6 ARRIVE-VIA in0.wl       [0m
+  4 [96mq0 j7 ARRIVE-VIA in0.wl       [0m
+    [96mq0 j8 ARRIVE-VIA in0.wl       [0m
+    [96mq0 j9 ARRIVE-VIA in0.wl       [0m
+  5 [32mq0 j0 TASK-END 0 "W 2"        [0m
+    [32mq0 j1 TASK-END 0 "W 1"        [0m
+    [33mq0 j0 EXITS-SERVER 0          [0m
+    [95mq0 j0 DEPART-VIA q1           [0m
+    [33mq0 j1 EXITS-SERVER 1          [0m
+    [95mq0 j1 DEPART-VIA q1           [0m
+    [93mq0 j2 ENTERS-SERVER 0         [0m
+    [92mq0 j2 TASK-START 0 "W 2"      [0m
+    [93mq0 j3 ENTERS-SERVER 1         [0m
+    [92mq0 j3 TASK-START 0 "W 3"      [0m
+    [96mq0 j10 ARRIVE-VIA in0.wl      [0m
+    [96mq0 j11 ARRIVE-VIA in0.wl      [0m
+    [96mq0 j12 ARRIVE-VIA in0.wl      [0m
+  6 [96mq0 j13 ARRIVE-VIA in0.wl      [0m [96mq1 j0 ARRIVE-VIA q0           [0m
+    [96mq0 j14 ARRIVE-VIA in0.wl      [0m [93mq1 j0 ENTERS-SERVER 0         [0m
+                                   [92mq1 j0 TASK-START 1 "W 3"      [0m
+                                   [96mq1 j1 ARRIVE-VIA q0           [0m
+                                   [93mq1 j1 ENTERS-SERVER 1         [0m
+                                   [92mq1 j1 TASK-START 1 "W 2"      [0m
+  7 [96mq0 j15 ARRIVE-VIA in0.wl      [0m
+    [96mq0 j16 ARRIVE-VIA in0.wl      [0m
+    [96mq0 j17 ARRIVE-VIA in0.wl      [0m
+    [96mq0 j18 ARRIVE-VIA in0.wl      [0m
+  8 [96mq0 j19 ARRIVE-VIA in0.wl      [0m
+    [96mq0 j20 ARRIVE-VIA in0.wl      [0m
+    [1;91mq0 j20 ERROR QUEUE-FULL       [0m
+  9 [96mq0 j21 ARRIVE-VIA in0.wl      [0m
+    [1;91mq0 j21 ERROR QUEUE-FULL       [0m
+ 10 [32mq0 j2 TASK-END 0 "W 2"        [0m
+    [32mq0 j3 TASK-END 0 "W 3"        [0m
+    [33mq0 j2 EXITS-SERVER 0          [0m
+    [95mq0 j2 DEPART-VIA q1           [0m
+    [33mq0 j3 EXITS-SERVER 1          [0m
+    [95mq0 j3 DEPART-VIA q1           [0m
+    [93mq0 j4 ENTERS-SERVER 0         [0m
+    [92mq0 j4 TASK-START 0 "W 3"      [0m
+    [93mq0 j5 ENTERS-SERVER 1         [0m
+    [92mq0 j5 TASK-START 0 "W 1"      [0m
+    [96mq0 j22 ARRIVE-VIA in0.wl      [0m
+ 11 [96mq0 j23 ARRIVE-VIA in0.wl      [0m [32mq1 j0 TASK-END 1 "W 3"        [0m
+                                   [32mq1 j1 TASK-END 1 "W 2"        [0m
+                                   [33mq1 j0 EXITS-SERVER 0          [0m
+                                   [95mq1 j0 DEPART-VIA q2           [0m
+                                   [33mq1 j1 EXITS-SERVER 1          [0m
+                                   [95mq1 j1 DEPART-VIA q2           [0m
+                                   [96mq1 j2 ARRIVE-VIA q0           [0m
+                                   [93mq1 j2 ENTERS-SERVER 0         [0m
+                                   [92mq1 j2 TASK-START 1 "W 2"      [0m
+                                   [96mq1 j3 ARRIVE-VIA q0           [0m
+                                   [93mq1 j3 ENTERS-SERVER 1         [0m
+                                   [92mq1 j3 TASK-START 1 "W 2"      [0m
+ 12 [96mq0 j24 ARRIVE-VIA in0.wl      [0m                                [96mq2 j0 ARRIVE-VIA q1           [0m
+    [1;91mq0 j24 ERROR QUEUE-FULL       [0m                                [93mq2 j0 ENTERS-SERVER 0         [0m
+    [96mq0 j25 ARRIVE-VIA in0.wl      [0m                                [96mq2 j1 ARRIVE-VIA q1           [0m
+    [1;91mq0 j25 ERROR QUEUE-FULL       [0m                                [93mq2 j1 ENTERS-SERVER 1         [0m
+ 13 [96mq0 j26 ARRIVE-VIA in0.wl      [0m
+    [1;91mq0 j26 ERROR QUEUE-FULL       [0m
+    [96mq0 j27 ARRIVE-VIA in0.wl      [0m
+    [1;91mq0 j27 ERROR QUEUE-FULL       [0m
+ 14 [96mq0 j28 ARRIVE-VIA in0.wl      [0m
+    [1;91mq0 j28 ERROR QUEUE-FULL       [0m
+    [96mq0 j29 ARRIVE-VIA in0.wl      [0m
+    [1;91mq0 j29 ERROR QUEUE-FULL       [0m
+    [96mq0 j30 ARRIVE-VIA in0.wl      [0m
+    [1;91mq0 j30 ERROR QUEUE-FULL       [0m
+ 15 [32mq0 j4 TASK-END 0 "W 3"        [0m
+    [32mq0 j5 TASK-END 0 "W 1"        [0m
+    [33mq0 j4 EXITS-SERVER 0          [0m
+    [95mq0 j4 DEPART-VIA q1           [0m
+    [33mq0 j5 EXITS-SERVER 1          [0m
+    [95mq0 j5 DEPART-VIA q1           [0m
+    [93mq0 j6 ENTERS-SERVER 0         [0m
+    [92mq0 j6 TASK-START 0 "W 2"      [0m
+    [93mq0 j7 ENTERS-SERVER 1         [0m
+    [92mq0 j7 TASK-START 0 "W 3"      [0m
+    [96mq0 j31 ARRIVE-VIA in0.wl      [0m
+    [96mq0 j32 ARRIVE-VIA in0.wl      [0m
+ 16 [96mq0 j33 ARRIVE-VIA in0.wl      [0m [32mq1 j2 TASK-END 1 "W 2"        [0m
+    [1;91mq0 j33 ERROR QUEUE-FULL       [0m [32mq1 j3 TASK-END 1 "W 2"        [0m
+    [96mq0 j34 ARRIVE-VIA in0.wl      [0m [33mq1 j2 EXITS-SERVER 0          [0m
+    [1;91mq0 j34 ERROR QUEUE-FULL       [0m [95mq1 j2 DEPART-VIA q2           [0m
+                                   [33mq1 j3 EXITS-SERVER 1          [0m
+                                   [95mq1 j3 DEPART-VIA q2           [0m
+                                   [96mq1 j4 ARRIVE-VIA q0           [0m
+                                   [93mq1 j4 ENTERS-SERVER 0         [0m
+                                   [92mq1 j4 TASK-START 1 "W 2"      [0m
+                                   [96mq1 j5 ARRIVE-VIA q0           [0m
+                                   [93mq1 j5 ENTERS-SERVER 1         [0m
+                                   [92mq1 j5 TASK-START 1 "W 2"      [0m
+ 17 [96mq0 j35 ARRIVE-VIA in0.wl      [0m                                [33mq2 j0 EXITS-SERVER 0          [0m
+    [1;91mq0 j35 ERROR QUEUE-FULL       [0m                                [95mq2 j0 DEPART-VIA q3           [0m
+    [96mq0 j36 ARRIVE-VIA in0.wl      [0m                                [33mq2 j1 EXITS-SERVER 1          [0m
+    [1;91mq0 j36 ERROR QUEUE-FULL       [0m                                [95mq2 j1 DEPART-VIA q3           [0m
+    [96mq0 j37 ARRIVE-VIA in0.wl      [0m                                [96mq2 j2 ARRIVE-VIA q1           [0m
+    [1;91mq0 j37 ERROR QUEUE-FULL       [0m                                [93mq2 j2 ENTERS-SERVER 0         [0m
+                                                                  [96mq2 j3 ARRIVE-VIA q1           [0m
+                                                                  [93mq2 j3 ENTERS-SERVER 1         [0m
+                                                                  [92mq2 j3 TASK-START 2 "W 1"      [0m
+ 18 [96mq0 j38 ARRIVE-VIA in0.wl      [0m                                                               [96mq3 j0 ARRIVE-VIA q2           [0m
+    [1;91mq0 j38 ERROR QUEUE-FULL       [0m                                                               [93mq3 j0 ENTERS-SERVER 0         [0m
+                                                                                                 [96mq3 j1 ARRIVE-VIA q2           [0m
+                                                                                                 [93mq3 j1 ENTERS-SERVER 1         [0m
+ 19 [96mq0 j39 ARRIVE-VIA in0.wl      [0m
+    [1;91mq0 j39 ERROR QUEUE-FULL       [0m
+    [96mq0 j40 ARRIVE-VIA in0.wl      [0m
+    [1;91mq0 j40 ERROR QUEUE-FULL       [0m
+ 20 [32mq0 j6 TASK-END 0 "W 2"        [0m
+    [32mq0 j7 TASK-END 0 "W 3"        [0m
+    [33mq0 j6 EXITS-SERVER 0          [0m
+    [95mq0 j6 DEPART-VIA q1           [0m
+    [33mq0 j7 EXITS-SERVER 1          [0m
+    [95mq0 j7 DEPART-VIA q1           [0m
+    [93mq0 j8 ENTERS-SERVER 0         [0m
+    [92mq0 j8 TASK-START 0 "W 1"      [0m
+    [93mq0 j9 ENTERS-SERVER 1         [0m
+    [92mq0 j9 TASK-START 0 "W 1"      [0m
+    [96mq0 j41 ARRIVE-VIA in0.wl      [0m
+ 21 [96mq0 j42 ARRIVE-VIA in0.wl      [0m [32mq1 j4 TASK-END 1 "W 2"        [0m
+    [96mq0 j43 ARRIVE-VIA in0.wl      [0m [32mq1 j5 TASK-END 1 "W 2"        [0m
+    [1;91mq0 j43 ERROR QUEUE-FULL       [0m [33mq1 j4 EXITS-SERVER 0          [0m
+    [96mq0 j44 ARRIVE-VIA in0.wl      [0m [95mq1 j4 DEPART-VIA q2           [0m
+    [1;91mq0 j44 ERROR QUEUE-FULL       [0m [33mq1 j5 EXITS-SERVER 1          [0m
+                                   [95mq1 j5 DEPART-VIA q2           [0m
+                                   [96mq1 j6 ARRIVE-VIA q0           [0m
+                                   [93mq1 j6 ENTERS-SERVER 0         [0m
+                                   [92mq1 j6 TASK-START 1 "W 2"      [0m
+                                   [96mq1 j7 ARRIVE-VIA q0           [0m
+                                   [93mq1 j7 ENTERS-SERVER 1         [0m
+ 22 [96mq0 j45 ARRIVE-VIA in0.wl      [0m                                [32mq2 j3 TASK-END 2 "W 1"        [0m
+    [1;91mq0 j45 ERROR QUEUE-FULL       [0m                                [33mq2 j2 EXITS-SERVER 0          [0m
+                                                                  [95mq2 j2 DEPART-VIA q3           [0m
+                                                                  [33mq2 j3 EXITS-SERVER 1          [0m
+                                                                  [95mq2 j3 DEPART-VIA q3           [0m
+                                                                  [96mq2 j4 ARRIVE-VIA q1           [0m
+                                                                  [93mq2 j4 ENTERS-SERVER 0         [0m
+                                                                  [96mq2 j5 ARRIVE-VIA q1           [0m
+                                                                  [93mq2 j5 ENTERS-SERVER 1         [0m
+                                                                  [92mq2 j5 TASK-START 2 "W 2"      [0m
+ 23 [96mq0 j46 ARRIVE-VIA in0.wl      [0m                                                               [33mq3 j0 EXITS-SERVER 0          [0m
+    [1;91mq0 j46 ERROR QUEUE-FULL       [0m                                                               [95mq3 j0 DEPART-VIA q4           [0m
+    [96mq0 j47 ARRIVE-VIA in0.wl      [0m                                                               [33mq3 j1 EXITS-SERVER 1          [0m
+    [1;91mq0 j47 ERROR QUEUE-FULL       [0m                                                               [95mq3 j1 DEPART-VIA q4           [0m
+                                                                                                 [96mq3 j2 ARRIVE-VIA q2           [0m
+                                                                                                 [93mq3 j2 ENTERS-SERVER 0         [0m
+                                                                                                 [96mq3 j3 ARRIVE-VIA q2           [0m
+                                                                                                 [93mq3 j3 ENTERS-SERVER 1         [0m
+ 24 [96mq0 j48 ARRIVE-VIA in0.wl      [0m                                                                                              [96mq4 j0 ARRIVE-VIA q3           [0m
+    [1;91mq0 j48 ERROR QUEUE-FULL       [0m                                                                                              [93mq4 j0 ENTERS-SERVER 0         [0m
+                                                                                                                                [96mq4 j1 ARRIVE-VIA q3           [0m
+                                                                                                                                [93mq4 j1 ENTERS-SERVER 1         [0m
+ 25 [32mq0 j8 TASK-END 0 "W 1"        [0m
+    [32mq0 j9 TASK-END 0 "W 1"        [0m
+    [33mq0 j8 EXITS-SERVER 0          [0m
+    [95mq0 j8 DEPART-VIA q1           [0m
+    [33mq0 j9 EXITS-SERVER 1          [0m
+    [95mq0 j9 DEPART-VIA q1           [0m
+    [93mq0 j10 ENTERS-SERVER 0        [0m
+    [92mq0 j10 TASK-START 0 "W 1"     [0m
+    [93mq0 j11 ENTERS-SERVER 1        [0m
+    [92mq0 j11 TASK-START 0 "W 2"     [0m
+    [96mq0 j49 ARRIVE-VIA in0.wl      [0m
+    [96mq0 j50 ARRIVE-VIA in0.wl      [0m
+    [96mq0 j51 ARRIVE-VIA in0.wl      [0m
+    [1;91mq0 j51 ERROR QUEUE-FULL       [0m
+ 26 [96mq0 j52 ARRIVE-VIA in0.wl      [0m [32mq1 j6 TASK-END 1 "W 2"        [0m
+    [1;91mq0 j52 ERROR QUEUE-FULL       [0m [33mq1 j6 EXITS-SERVER 0          [0m
+    [96mq0 j53 ARRIVE-VIA in0.wl      [0m [95mq1 j6 DEPART-VIA q2           [0m
+    [1;91mq0 j53 ERROR QUEUE-FULL       [0m [33mq1 j7 EXITS-SERVER 1          [0m
+    [96mq0 j54 ARRIVE-VIA in0.wl      [0m [95mq1 j7 DEPART-VIA q2           [0m
+    [1;91mq0 j54 ERROR QUEUE-FULL       [0m [96mq1 j8 ARRIVE-VIA q0           [0m
+    [96mq0 j55 ARRIVE-VIA in0.wl      [0m [93mq1 j8 ENTERS-SERVER 0         [0m
+    [1;91mq0 j55 ERROR QUEUE-FULL       [0m [96mq1 j9 ARRIVE-VIA q0           [0m
+                                   [93mq1 j9 ENTERS-SERVER 1         [0m
+ 27 [96mq0 j56 ARRIVE-VIA in0.wl      [0m                                [32mq2 j5 TASK-END 2 "W 2"        [0m
+    [1;91mq0 j56 ERROR QUEUE-FULL       [0m                                [33mq2 j4 EXITS-SERVER 0          [0m
+    [96mq0 j57 ARRIVE-VIA in0.wl      [0m                                [95mq2 j4 DEPART-VIA q3           [0m
+    [1;91mq0 j57 ERROR QUEUE-FULL       [0m                                [33mq2 j5 EXITS-SERVER 1          [0m
+                                                                  [95mq2 j5 DEPART-VIA q3           [0m
+                                                                  [96mq2 j6 ARRIVE-VIA q1           [0m
+                                                                  [93mq2 j6 ENTERS-SERVER 0         [0m
+                                                                  [92mq2 j6 TASK-START 2 "W 2"      [0m
+                                                                  [96mq2 j7 ARRIVE-VIA q1           [0m
+                                                                  [93mq2 j7 ENTERS-SERVER 1         [0m
+ 28 [96mq0 j58 ARRIVE-VIA in0.wl      [0m                                                               [33mq3 j2 EXITS-SERVER 0          [0m
+    [1;91mq0 j58 ERROR QUEUE-FULL       [0m                                                               [95mq3 j2 DEPART-VIA q4           [0m
+    [96mq0 j59 ARRIVE-VIA in0.wl      [0m                                                               [33mq3 j3 EXITS-SERVER 1          [0m
+    [1;91mq0 j59 ERROR QUEUE-FULL       [0m                                                               [95mq3 j3 DEPART-VIA q4           [0m
+                                                                                                 [96mq3 j4 ARRIVE-VIA q2           [0m
+                                                                                                 [93mq3 j4 ENTERS-SERVER 0         [0m
+                                                                                                 [96mq3 j5 ARRIVE-VIA q2           [0m
+                                                                                                 [93mq3 j5 ENTERS-SERVER 1         [0m
+ 29                                                                                                                             [33mq4 j0 EXITS-SERVER 0          [0m
+                                                                                                                                [95mq4 j0 DEPART-VIA out_final.wl [0m
+                                                                                                                                [33mq4 j1 EXITS-SERVER 1          [0m
+                                                                                                                                [95mq4 j1 DEPART-VIA out_final.wl [0m
+                                                                                                                                [96mq4 j2 ARRIVE-VIA q3           [0m
+                                                                                                                                [93mq4 j2 ENTERS-SERVER 0         [0m
+                                                                                                                                [96mq4 j3 ARRIVE-VIA q3           [0m
+                                                                                                                                [93mq4 j3 ENTERS-SERVER 1         [0m
+ 30 [32mq0 j10 TASK-END 0 "W 1"       [0m
+    [32mq0 j11 TASK-END 0 "W 2"       [0m
+    [33mq0 j10 EXITS-SERVER 0         [0m
+    [95mq0 j10 DEPART-VIA q1          [0m
+    [33mq0 j11 EXITS-SERVER 1         [0m
+    [95mq0 j11 DEPART-VIA q1          [0m
+    [93mq0 j12 ENTERS-SERVER 0        [0m
+    [92mq0 j12 TASK-START 0 "W 3"     [0m
+    [93mq0 j13 ENTERS-SERVER 1        [0m
+    [92mq0 j13 TASK-START 0 "W 1"     [0m
+    [96mq0 j60 ARRIVE-VIA in0.wl      [0m
+    [96mq0 j61 ARRIVE-VIA in0.wl      [0m
+ 31 [96mq0 j62 ARRIVE-VIA in0.wl      [0m [33mq1 j8 EXITS-SERVER 0          [0m
+    [1;91mq0 j62 ERROR QUEUE-FULL       [0m [95mq1 j8 DEPART-VIA q2           [0m
+    [96mq0 j63 ARRIVE-VIA in0.wl      [0m [33mq1 j9 EXITS-SERVER 1          [0m
+    [1;91mq0 j63 ERROR QUEUE-FULL       [0m [95mq1 j9 DEPART-VIA q2           [0m
+                                   [96mq1 j10 ARRIVE-VIA q0          [0m
+                                   [93mq1 j10 ENTERS-SERVER 0        [0m
+                                   [92mq1 j10 TASK-START 1 "W 3"     [0m
+                                   [96mq1 j11 ARRIVE-VIA q0          [0m
+                                   [93mq1 j11 ENTERS-SERVER 1        [0m
+                                   [92mq1 j11 TASK-START 1 "W 2"     [0m
+ 32 [96mq0 j64 ARRIVE-VIA in0.wl      [0m                                [32mq2 j6 TASK-END 2 "W 2"        [0m
+    [1;91mq0 j64 ERROR QUEUE-FULL       [0m                                [33mq2 j6 EXITS-SERVER 0          [0m
+    [96mq0 j65 ARRIVE-VIA in0.wl      [0m                                [95mq2 j6 DEPART-VIA q3           [0m
+    [1;91mq0 j65 ERROR QUEUE-FULL       [0m                                [33mq2 j7 EXITS-SERVER 1          [0m
+    [96mq0 j66 ARRIVE-VIA in0.wl      [0m                                [95mq2 j7 DEPART-VIA q3           [0m
+    [1;91mq0 j66 ERROR QUEUE-FULL       [0m                                [96mq2 j8 ARRIVE-VIA q1           [0m
+                                                                  [93mq2 j8 ENTERS-SERVER 0         [0m
+                                                                  [96mq2 j9 ARRIVE-VIA q1           [0m
+                                                                  [93mq2 j9 ENTERS-SERVER 1         [0m
+ 33 [96mq0 j67 ARRIVE-VIA in0.wl      [0m                                                               [33mq3 j4 EXITS-SERVER 0          [0m
+    [1;91mq0 j67 ERROR QUEUE-FULL       [0m                                                               [95mq3 j4 DEPART-VIA q4           [0m
+    [96mq0 j68 ARRIVE-VIA in0.wl      [0m                                                               [33mq3 j5 EXITS-SERVER 1          [0m
+    [1;91mq0 j68 ERROR QUEUE-FULL       [0m                                                               [95mq3 j5 DEPART-VIA q4           [0m
+    [96mq0 j69 ARRIVE-VIA in0.wl      [0m                                                               [96mq3 j6 ARRIVE-VIA q2           [0m
+    [1;91mq0 j69 ERROR QUEUE-FULL       [0m                                                               [93mq3 j6 ENTERS-SERVER 0         [0m
+    [96mq0 j70 ARRIVE-VIA in0.wl      [0m                                                               [96mq3 j7 ARRIVE-VIA q2           [0m
+    [1;91mq0 j70 ERROR QUEUE-FULL       [0m                                                               [93mq3 j7 ENTERS-SERVER 1         [0m
+ 34                                                                                                                             [33mq4 j2 EXITS-SERVER 0          [0m
+                                                                                                                                [95mq4 j2 DEPART-VIA out_final.wl [0m
+                                                                                                                                [33mq4 j3 EXITS-SERVER 1          [0m
+                                                                                                                                [95mq4 j3 DEPART-VIA out_final.wl [0m
+                                                                                                                                [96mq4 j4 ARRIVE-VIA q3           [0m
+                                                                                                                                [93mq4 j4 ENTERS-SERVER 0         [0m
+                                                                                                                                [96mq4 j5 ARRIVE-VIA q3           [0m
+                                                                                                                                [93mq4 j5 ENTERS-SERVER 1         [0m
+ 35 [32mq0 j12 TASK-END 0 "W 3"       [0m
+    [32mq0 j13 TASK-END 0 "W 1"       [0m
+    [33mq0 j12 EXITS-SERVER 0         [0m
+    [95mq0 j12 DEPART-VIA q1          [0m
+    [33mq0 j13 EXITS-SERVER 1         [0m
+    [95mq0 j13 DEPART-VIA q1          [0m
+    [93mq0 j14 ENTERS-SERVER 0        [0m
+    [92mq0 j14 TASK-START 0 "W 2"     [0m
+    [93mq0 j15 ENTERS-SERVER 1        [0m
+    [92mq0 j15 TASK-START 0 "W 1"     [0m
+    [96mq0 j71 ARRIVE-VIA in0.wl      [0m
+    [96mq0 j72 ARRIVE-VIA in0.wl      [0m
+ 36 [96mq0 j73 ARRIVE-VIA in0.wl      [0m [32mq1 j10 TASK-END 1 "W 3"       [0m
+    [1;91mq0 j73 ERROR QUEUE-FULL       [0m [32mq1 j11 TASK-END 1 "W 2"       [0m
+    [96mq0 j74 ARRIVE-VIA in0.wl      [0m [33mq1 j10 EXITS-SERVER 0         [0m
+    [1;91mq0 j74 ERROR QUEUE-FULL       [0m [95mq1 j10 DEPART-VIA q2          [0m
+                                   [33mq1 j11 EXITS-SERVER 1         [0m
+                                   [95mq1 j11 DEPART-VIA q2          [0m
+                                   [96mq1 j12 ARRIVE-VIA q0          [0m
+                                   [93mq1 j12 ENTERS-SERVER 0        [0m
+                                   [92mq1 j12 TASK-START 1 "W 2"     [0m
+                                   [96mq1 j13 ARRIVE-VIA q0          [0m
+                                   [93mq1 j13 ENTERS-SERVER 1        [0m
+ 37 [96mq0 j75 ARRIVE-VIA in0.wl      [0m                                [33mq2 j8 EXITS-SERVER 0          [0m
+    [1;91mq0 j75 ERROR QUEUE-FULL       [0m                                [95mq2 j8 DEPART-VIA q3           [0m
+                                                                  [33mq2 j9 EXITS-SERVER 1          [0m
+                                                                  [95mq2 j9 DEPART-VIA q3           [0m
+                                                                  [96mq2 j10 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j10 ENTERS-SERVER 0        [0m
+                                                                  [92mq2 j10 TASK-START 2 "W 1"     [0m
+                                                                  [96mq2 j11 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j11 ENTERS-SERVER 1        [0m
+ 38                                                                                              [33mq3 j6 EXITS-SERVER 0          [0m
+                                                                                                 [95mq3 j6 DEPART-VIA q4           [0m
+                                                                                                 [33mq3 j7 EXITS-SERVER 1          [0m
+                                                                                                 [95mq3 j7 DEPART-VIA q4           [0m
+                                                                                                 [96mq3 j8 ARRIVE-VIA q2           [0m
+                                                                                                 [93mq3 j8 ENTERS-SERVER 0         [0m
+                                                                                                 [96mq3 j9 ARRIVE-VIA q2           [0m
+                                                                                                 [93mq3 j9 ENTERS-SERVER 1         [0m
+ 39 [96mq0 j76 ARRIVE-VIA in0.wl      [0m                                                                                              [33mq4 j4 EXITS-SERVER 0          [0m
+    [1;91mq0 j76 ERROR QUEUE-FULL       [0m                                                                                              [95mq4 j4 DEPART-VIA out_final.wl [0m
+    [96mq0 j77 ARRIVE-VIA in0.wl      [0m                                                                                              [33mq4 j5 EXITS-SERVER 1          [0m
+    [1;91mq0 j77 ERROR QUEUE-FULL       [0m                                                                                              [95mq4 j5 DEPART-VIA out_final.wl [0m
+                                                                                                                                [96mq4 j6 ARRIVE-VIA q3           [0m
+                                                                                                                                [93mq4 j6 ENTERS-SERVER 0         [0m
+                                                                                                                                [96mq4 j7 ARRIVE-VIA q3           [0m
+                                                                                                                                [93mq4 j7 ENTERS-SERVER 1         [0m
+ 40 [32mq0 j14 TASK-END 0 "W 2"       [0m
+    [32mq0 j15 TASK-END 0 "W 1"       [0m
+    [33mq0 j14 EXITS-SERVER 0         [0m
+    [95mq0 j14 DEPART-VIA q1          [0m
+    [33mq0 j15 EXITS-SERVER 1         [0m
+    [95mq0 j15 DEPART-VIA q1          [0m
+    [93mq0 j16 ENTERS-SERVER 0        [0m
+    [92mq0 j16 TASK-START 0 "W 3"     [0m
+    [93mq0 j17 ENTERS-SERVER 1        [0m
+    [92mq0 j17 TASK-START 0 "W 2"     [0m
+    [96mq0 j78 ARRIVE-VIA in0.wl      [0m
+ 41 [96mq0 j79 ARRIVE-VIA in0.wl      [0m [32mq1 j12 TASK-END 1 "W 2"       [0m
+                                   [33mq1 j12 EXITS-SERVER 0         [0m
+                                   [95mq1 j12 DEPART-VIA q2          [0m
+                                   [33mq1 j13 EXITS-SERVER 1         [0m
+                                   [95mq1 j13 DEPART-VIA q2          [0m
+                                   [96mq1 j14 ARRIVE-VIA q0          [0m
+                                   [93mq1 j14 ENTERS-SERVER 0        [0m
+                                   [92mq1 j14 TASK-START 1 "W 2"     [0m
+                                   [96mq1 j15 ARRIVE-VIA q0          [0m
+                                   [93mq1 j15 ENTERS-SERVER 1        [0m
+ 42 [96mq0 j80 ARRIVE-VIA in0.wl      [0m                                [32mq2 j10 TASK-END 2 "W 1"       [0m
+    [1;91mq0 j80 ERROR QUEUE-FULL       [0m                                [33mq2 j10 EXITS-SERVER 0         [0m
+    [96mq0 j81 ARRIVE-VIA in0.wl      [0m                                [95mq2 j10 DEPART-VIA q3          [0m
+    [1;91mq0 j81 ERROR QUEUE-FULL       [0m                                [33mq2 j11 EXITS-SERVER 1         [0m
+    [96mq0 j82 ARRIVE-VIA in0.wl      [0m                                [95mq2 j11 DEPART-VIA q3          [0m
+    [1;91mq0 j82 ERROR QUEUE-FULL       [0m                                [96mq2 j12 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j12 ENTERS-SERVER 0        [0m
+                                                                  [92mq2 j12 TASK-START 2 "W 3"     [0m
+                                                                  [96mq2 j13 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j13 ENTERS-SERVER 1        [0m
+ 43 [96mq0 j83 ARRIVE-VIA in0.wl      [0m                                                               [33mq3 j8 EXITS-SERVER 0          [0m
+    [1;91mq0 j83 ERROR QUEUE-FULL       [0m                                                               [95mq3 j8 DEPART-VIA q4           [0m
+    [96mq0 j84 ARRIVE-VIA in0.wl      [0m                                                               [33mq3 j9 EXITS-SERVER 1          [0m
+    [1;91mq0 j84 ERROR QUEUE-FULL       [0m                                                               [95mq3 j9 DEPART-VIA q4           [0m
+                                                                                                 [96mq3 j10 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j10 ENTERS-SERVER 0        [0m
+                                                                                                 [96mq3 j11 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j11 ENTERS-SERVER 1        [0m
+ 44 [96mq0 j85 ARRIVE-VIA in0.wl      [0m                                                                                              [33mq4 j6 EXITS-SERVER 0          [0m
+    [1;91mq0 j85 ERROR QUEUE-FULL       [0m                                                                                              [95mq4 j6 DEPART-VIA out_final.wl [0m
+    [96mq0 j86 ARRIVE-VIA in0.wl      [0m                                                                                              [33mq4 j7 EXITS-SERVER 1          [0m
+    [1;91mq0 j86 ERROR QUEUE-FULL       [0m                                                                                              [95mq4 j7 DEPART-VIA out_final.wl [0m
+    [96mq0 j87 ARRIVE-VIA in0.wl      [0m                                                                                              [96mq4 j8 ARRIVE-VIA q3           [0m
+    [1;91mq0 j87 ERROR QUEUE-FULL       [0m                                                                                              [93mq4 j8 ENTERS-SERVER 0         [0m
+                                                                                                                                [96mq4 j9 ARRIVE-VIA q3           [0m
+                                                                                                                                [93mq4 j9 ENTERS-SERVER 1         [0m
+ 45 [32mq0 j16 TASK-END 0 "W 3"       [0m
+    [32mq0 j17 TASK-END 0 "W 2"       [0m
+    [33mq0 j16 EXITS-SERVER 0         [0m
+    [95mq0 j16 DEPART-VIA q1          [0m
+    [33mq0 j17 EXITS-SERVER 1         [0m
+    [95mq0 j17 DEPART-VIA q1          [0m
+    [93mq0 j18 ENTERS-SERVER 0        [0m
+    [92mq0 j18 TASK-START 0 "W 1"     [0m
+    [93mq0 j19 ENTERS-SERVER 1        [0m
+    [92mq0 j19 TASK-START 0 "W 3"     [0m
+    [96mq0 j88 ARRIVE-VIA in0.wl      [0m
+ 46 [96mq0 j89 ARRIVE-VIA in0.wl      [0m [32mq1 j14 TASK-END 1 "W 2"       [0m
+                                   [33mq1 j14 EXITS-SERVER 0         [0m
+                                   [95mq1 j14 DEPART-VIA q2          [0m
+                                   [33mq1 j15 EXITS-SERVER 1         [0m
+                                   [95mq1 j15 DEPART-VIA q2          [0m
+                                   [96mq1 j16 ARRIVE-VIA q0          [0m
+                                   [93mq1 j16 ENTERS-SERVER 0        [0m
+                                   [92mq1 j16 TASK-START 1 "W 3"     [0m
+                                   [96mq1 j17 ARRIVE-VIA q0          [0m
+                                   [93mq1 j17 ENTERS-SERVER 1        [0m
+                                   [92mq1 j17 TASK-START 1 "W 1"     [0m
+ 47 [96mq0 j90 ARRIVE-VIA in0.wl      [0m                                [32mq2 j12 TASK-END 2 "W 3"       [0m
+    [1;91mq0 j90 ERROR QUEUE-FULL       [0m                                [33mq2 j12 EXITS-SERVER 0         [0m
+    [96mq0 j91 ARRIVE-VIA in0.wl      [0m                                [95mq2 j12 DEPART-VIA q3          [0m
+    [1;91mq0 j91 ERROR QUEUE-FULL       [0m                                [33mq2 j13 EXITS-SERVER 1         [0m
+                                                                  [95mq2 j13 DEPART-VIA q3          [0m
+                                                                  [96mq2 j14 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j14 ENTERS-SERVER 0        [0m
+                                                                  [96mq2 j15 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j15 ENTERS-SERVER 1        [0m
+ 48 [96mq0 j92 ARRIVE-VIA in0.wl      [0m                                                               [33mq3 j10 EXITS-SERVER 0         [0m
+    [1;91mq0 j92 ERROR QUEUE-FULL       [0m                                                               [95mq3 j10 DEPART-VIA q4          [0m
+    [96mq0 j93 ARRIVE-VIA in0.wl      [0m                                                               [33mq3 j11 EXITS-SERVER 1         [0m
+    [1;91mq0 j93 ERROR QUEUE-FULL       [0m                                                               [95mq3 j11 DEPART-VIA q4          [0m
+    [96mq0 j94 ARRIVE-VIA in0.wl      [0m                                                               [96mq3 j12 ARRIVE-VIA q2          [0m
+    [1;91mq0 j94 ERROR QUEUE-FULL       [0m                                                               [93mq3 j12 ENTERS-SERVER 0        [0m
+                                                                                                 [96mq3 j13 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j13 ENTERS-SERVER 1        [0m
+ 49 [96mq0 j95 ARRIVE-VIA in0.wl      [0m                                                                                              [33mq4 j8 EXITS-SERVER 0          [0m
+    [1;91mq0 j95 ERROR QUEUE-FULL       [0m                                                                                              [95mq4 j8 DEPART-VIA out_final.wl [0m
+    [96mq0 j96 ARRIVE-VIA in0.wl      [0m                                                                                              [33mq4 j9 EXITS-SERVER 1          [0m
+    [1;91mq0 j96 ERROR QUEUE-FULL       [0m                                                                                              [95mq4 j9 DEPART-VIA out_final.wl [0m
+    [96mq0 j97 ARRIVE-VIA in0.wl      [0m                                                                                              [96mq4 j10 ARRIVE-VIA q3          [0m
+    [1;91mq0 j97 ERROR QUEUE-FULL       [0m                                                                                              [93mq4 j10 ENTERS-SERVER 0        [0m
+                                                                                                                                [96mq4 j11 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j11 ENTERS-SERVER 1        [0m
+ 50 [32mq0 j18 TASK-END 0 "W 1"       [0m
+    [32mq0 j19 TASK-END 0 "W 3"       [0m
+    [33mq0 j18 EXITS-SERVER 0         [0m
+    [95mq0 j18 DEPART-VIA q1          [0m
+    [33mq0 j19 EXITS-SERVER 1         [0m
+    [95mq0 j19 DEPART-VIA q1          [0m
+    [93mq0 j22 ENTERS-SERVER 0        [0m
+    [92mq0 j22 TASK-START 0 "W 1"     [0m
+    [93mq0 j23 ENTERS-SERVER 1        [0m
+    [92mq0 j23 TASK-START 0 "W 3"     [0m
+ 51                                [32mq1 j16 TASK-END 1 "W 3"       [0m
+                                   [32mq1 j17 TASK-END 1 "W 1"       [0m
+                                   [33mq1 j16 EXITS-SERVER 0         [0m
+                                   [95mq1 j16 DEPART-VIA q2          [0m
+                                   [33mq1 j17 EXITS-SERVER 1         [0m
+                                   [95mq1 j17 DEPART-VIA q2          [0m
+                                   [96mq1 j18 ARRIVE-VIA q0          [0m
+                                   [93mq1 j18 ENTERS-SERVER 0        [0m
+                                   [92mq1 j18 TASK-START 1 "W 2"     [0m
+                                   [96mq1 j19 ARRIVE-VIA q0          [0m
+                                   [93mq1 j19 ENTERS-SERVER 1        [0m
+                                   [92mq1 j19 TASK-START 1 "W 4"     [0m
+ 52                                                               [33mq2 j14 EXITS-SERVER 0         [0m
+                                                                  [95mq2 j14 DEPART-VIA q3          [0m
+                                                                  [33mq2 j15 EXITS-SERVER 1         [0m
+                                                                  [95mq2 j15 DEPART-VIA q3          [0m
+                                                                  [96mq2 j16 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j16 ENTERS-SERVER 0        [0m
+                                                                  [92mq2 j16 TASK-START 2 "W 3"     [0m
+                                                                  [96mq2 j17 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j17 ENTERS-SERVER 1        [0m
+                                                                  [92mq2 j17 TASK-START 2 "W 1"     [0m
+ 53                                                                                              [33mq3 j12 EXITS-SERVER 0         [0m
+                                                                                                 [95mq3 j12 DEPART-VIA q4          [0m
+                                                                                                 [33mq3 j13 EXITS-SERVER 1         [0m
+                                                                                                 [95mq3 j13 DEPART-VIA q4          [0m
+                                                                                                 [96mq3 j14 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j14 ENTERS-SERVER 0        [0m
+                                                                                                 [96mq3 j15 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j15 ENTERS-SERVER 1        [0m
+ 54                                                                                                                             [33mq4 j10 EXITS-SERVER 0         [0m
+                                                                                                                                [95mq4 j10 DEPART-VIA out_final.wl[0m
+                                                                                                                                [33mq4 j11 EXITS-SERVER 1         [0m
+                                                                                                                                [95mq4 j11 DEPART-VIA out_final.wl[0m
+                                                                                                                                [96mq4 j12 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j12 ENTERS-SERVER 0        [0m
+                                                                                                                                [96mq4 j13 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j13 ENTERS-SERVER 1        [0m
+ 55 [32mq0 j22 TASK-END 0 "W 1"       [0m
+    [32mq0 j23 TASK-END 0 "W 3"       [0m
+    [33mq0 j22 EXITS-SERVER 0         [0m
+    [95mq0 j22 DEPART-VIA q1          [0m
+    [33mq0 j23 EXITS-SERVER 1         [0m
+    [95mq0 j23 DEPART-VIA q1          [0m
+    [93mq0 j31 ENTERS-SERVER 0        [0m
+    [92mq0 j31 TASK-START 0 "W 1"     [0m
+    [93mq0 j32 ENTERS-SERVER 1        [0m
+    [92mq0 j32 TASK-START 0 "W 3"     [0m
+ 56                                [32mq1 j18 TASK-END 1 "W 2"       [0m
+                                   [32mq1 j19 TASK-END 1 "W 4"       [0m
+                                   [33mq1 j18 EXITS-SERVER 0         [0m
+                                   [95mq1 j18 DEPART-VIA q2          [0m
+                                   [33mq1 j19 EXITS-SERVER 1         [0m
+                                   [95mq1 j19 DEPART-VIA q2          [0m
+                                   [96mq1 j22 ARRIVE-VIA q0          [0m
+                                   [93mq1 j22 ENTERS-SERVER 0        [0m
+                                   [92mq1 j22 TASK-START 1 "W 1"     [0m
+                                   [96mq1 j23 ARRIVE-VIA q0          [0m
+                                   [93mq1 j23 ENTERS-SERVER 1        [0m
+                                   [92mq1 j23 TASK-START 1 "W 2"     [0m
+ 57                                                               [32mq2 j16 TASK-END 2 "W 3"       [0m
+                                                                  [32mq2 j17 TASK-END 2 "W 1"       [0m
+                                                                  [33mq2 j16 EXITS-SERVER 0         [0m
+                                                                  [95mq2 j16 DEPART-VIA q3          [0m
+                                                                  [33mq2 j17 EXITS-SERVER 1         [0m
+                                                                  [95mq2 j17 DEPART-VIA q3          [0m
+                                                                  [96mq2 j18 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j18 ENTERS-SERVER 0        [0m
+                                                                  [92mq2 j18 TASK-START 2 "W 2"     [0m
+                                                                  [96mq2 j19 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j19 ENTERS-SERVER 1        [0m
+                                                                  [92mq2 j19 TASK-START 2 "W 3"     [0m
+ 58                                                                                              [33mq3 j14 EXITS-SERVER 0         [0m
+                                                                                                 [95mq3 j14 DEPART-VIA q4          [0m
+                                                                                                 [33mq3 j15 EXITS-SERVER 1         [0m
+                                                                                                 [95mq3 j15 DEPART-VIA q4          [0m
+                                                                                                 [96mq3 j16 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j16 ENTERS-SERVER 0        [0m
+                                                                                                 [96mq3 j17 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j17 ENTERS-SERVER 1        [0m
+ 59                                                                                                                             [33mq4 j12 EXITS-SERVER 0         [0m
+                                                                                                                                [95mq4 j12 DEPART-VIA out_final.wl[0m
+                                                                                                                                [33mq4 j13 EXITS-SERVER 1         [0m
+                                                                                                                                [95mq4 j13 DEPART-VIA out_final.wl[0m
+                                                                                                                                [96mq4 j14 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j14 ENTERS-SERVER 0        [0m
+                                                                                                                                [96mq4 j15 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j15 ENTERS-SERVER 1        [0m
+ 60 [32mq0 j31 TASK-END 0 "W 1"       [0m
+    [32mq0 j32 TASK-END 0 "W 3"       [0m
+    [33mq0 j31 EXITS-SERVER 0         [0m
+    [95mq0 j31 DEPART-VIA q1          [0m
+    [33mq0 j32 EXITS-SERVER 1         [0m
+    [95mq0 j32 DEPART-VIA q1          [0m
+    [93mq0 j41 ENTERS-SERVER 0        [0m
+    [92mq0 j41 TASK-START 0 "W 2"     [0m
+    [93mq0 j42 ENTERS-SERVER 1        [0m
+    [92mq0 j42 TASK-START 0 "W 4"     [0m
+ 61                                [32mq1 j22 TASK-END 1 "W 1"       [0m
+                                   [32mq1 j23 TASK-END 1 "W 2"       [0m
+                                   [33mq1 j22 EXITS-SERVER 0         [0m
+                                   [95mq1 j22 DEPART-VIA q2          [0m
+                                   [33mq1 j23 EXITS-SERVER 1         [0m
+                                   [95mq1 j23 DEPART-VIA q2          [0m
+                                   [96mq1 j31 ARRIVE-VIA q0          [0m
+                                   [93mq1 j31 ENTERS-SERVER 0        [0m
+                                   [92mq1 j31 TASK-START 1 "W 2"     [0m
+                                   [96mq1 j32 ARRIVE-VIA q0          [0m
+                                   [93mq1 j32 ENTERS-SERVER 1        [0m
+ 62                                                               [32mq2 j18 TASK-END 2 "W 2"       [0m
+                                                                  [32mq2 j19 TASK-END 2 "W 3"       [0m
+                                                                  [33mq2 j18 EXITS-SERVER 0         [0m
+                                                                  [95mq2 j18 DEPART-VIA q3          [0m
+                                                                  [33mq2 j19 EXITS-SERVER 1         [0m
+                                                                  [95mq2 j19 DEPART-VIA q3          [0m
+                                                                  [96mq2 j22 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j22 ENTERS-SERVER 0        [0m
+                                                                  [96mq2 j23 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j23 ENTERS-SERVER 1        [0m
+ 63                                                                                              [33mq3 j16 EXITS-SERVER 0         [0m
+                                                                                                 [95mq3 j16 DEPART-VIA q4          [0m
+                                                                                                 [33mq3 j17 EXITS-SERVER 1         [0m
+                                                                                                 [95mq3 j17 DEPART-VIA q4          [0m
+                                                                                                 [96mq3 j18 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j18 ENTERS-SERVER 0        [0m
+                                                                                                 [96mq3 j19 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j19 ENTERS-SERVER 1        [0m
+ 64                                                                                                                             [33mq4 j14 EXITS-SERVER 0         [0m
+                                                                                                                                [95mq4 j14 DEPART-VIA out_final.wl[0m
+                                                                                                                                [33mq4 j15 EXITS-SERVER 1         [0m
+                                                                                                                                [95mq4 j15 DEPART-VIA out_final.wl[0m
+                                                                                                                                [96mq4 j16 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j16 ENTERS-SERVER 0        [0m
+                                                                                                                                [96mq4 j17 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j17 ENTERS-SERVER 1        [0m
+ 65 [32mq0 j41 TASK-END 0 "W 2"       [0m
+    [32mq0 j42 TASK-END 0 "W 4"       [0m
+    [33mq0 j41 EXITS-SERVER 0         [0m
+    [95mq0 j41 DEPART-VIA q1          [0m
+    [33mq0 j42 EXITS-SERVER 1         [0m
+    [95mq0 j42 DEPART-VIA q1          [0m
+    [93mq0 j49 ENTERS-SERVER 0        [0m
+    [92mq0 j49 TASK-START 0 "W 1"     [0m
+    [93mq0 j50 ENTERS-SERVER 1        [0m
+    [92mq0 j50 TASK-START 0 "W 1"     [0m
+ 66                                [32mq1 j31 TASK-END 1 "W 2"       [0m
+                                   [33mq1 j31 EXITS-SERVER 0         [0m
+                                   [95mq1 j31 DEPART-VIA q2          [0m
+                                   [33mq1 j32 EXITS-SERVER 1         [0m
+                                   [95mq1 j32 DEPART-VIA q2          [0m
+                                   [96mq1 j41 ARRIVE-VIA q0          [0m
+                                   [93mq1 j41 ENTERS-SERVER 0        [0m
+                                   [92mq1 j41 TASK-START 1 "W 3"     [0m
+                                   [96mq1 j42 ARRIVE-VIA q0          [0m
+                                   [93mq1 j42 ENTERS-SERVER 1        [0m
+                                   [92mq1 j42 TASK-START 1 "W 2"     [0m
+ 67                                                               [33mq2 j22 EXITS-SERVER 0         [0m
+                                                                  [95mq2 j22 DEPART-VIA q3          [0m
+                                                                  [33mq2 j23 EXITS-SERVER 1         [0m
+                                                                  [95mq2 j23 DEPART-VIA q3          [0m
+                                                                  [96mq2 j31 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j31 ENTERS-SERVER 0        [0m
+                                                                  [96mq2 j32 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j32 ENTERS-SERVER 1        [0m
+ 68                                                                                              [33mq3 j18 EXITS-SERVER 0         [0m
+                                                                                                 [95mq3 j18 DEPART-VIA q4          [0m
+                                                                                                 [33mq3 j19 EXITS-SERVER 1         [0m
+                                                                                                 [95mq3 j19 DEPART-VIA q4          [0m
+                                                                                                 [96mq3 j22 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j22 ENTERS-SERVER 0        [0m
+                                                                                                 [96mq3 j23 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j23 ENTERS-SERVER 1        [0m
+ 69                                                                                                                             [33mq4 j16 EXITS-SERVER 0         [0m
+                                                                                                                                [95mq4 j16 DEPART-VIA out_final.wl[0m
+                                                                                                                                [33mq4 j17 EXITS-SERVER 1         [0m
+                                                                                                                                [95mq4 j17 DEPART-VIA out_final.wl[0m
+                                                                                                                                [96mq4 j18 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j18 ENTERS-SERVER 0        [0m
+                                                                                                                                [96mq4 j19 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j19 ENTERS-SERVER 1        [0m
+ 70 [32mq0 j49 TASK-END 0 "W 1"       [0m
+    [32mq0 j50 TASK-END 0 "W 1"       [0m
+    [33mq0 j49 EXITS-SERVER 0         [0m
+    [95mq0 j49 DEPART-VIA q1          [0m
+    [33mq0 j50 EXITS-SERVER 1         [0m
+    [95mq0 j50 DEPART-VIA q1          [0m
+    [93mq0 j60 ENTERS-SERVER 0        [0m
+    [92mq0 j60 TASK-START 0 "W 4"     [0m
+    [93mq0 j61 ENTERS-SERVER 1        [0m
+    [92mq0 j61 TASK-START 0 "W 1"     [0m
+ 71                                [32mq1 j41 TASK-END 1 "W 3"       [0m
+                                   [32mq1 j42 TASK-END 1 "W 2"       [0m
+                                   [33mq1 j41 EXITS-SERVER 0         [0m
+                                   [95mq1 j41 DEPART-VIA q2          [0m
+                                   [33mq1 j42 EXITS-SERVER 1         [0m
+                                   [95mq1 j42 DEPART-VIA q2          [0m
+                                   [96mq1 j49 ARRIVE-VIA q0          [0m
+                                   [93mq1 j49 ENTERS-SERVER 0        [0m
+                                   [92mq1 j49 TASK-START 1 "W 2"     [0m
+                                   [96mq1 j50 ARRIVE-VIA q0          [0m
+                                   [93mq1 j50 ENTERS-SERVER 1        [0m
+                                   [92mq1 j50 TASK-START 1 "W 2"     [0m
+ 72                                                               [33mq2 j31 EXITS-SERVER 0         [0m
+                                                                  [95mq2 j31 DEPART-VIA q3          [0m
+                                                                  [33mq2 j32 EXITS-SERVER 1         [0m
+                                                                  [95mq2 j32 DEPART-VIA q3          [0m
+                                                                  [96mq2 j41 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j41 ENTERS-SERVER 0        [0m
+                                                                  [92mq2 j41 TASK-START 2 "W 3"     [0m
+                                                                  [96mq2 j42 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j42 ENTERS-SERVER 1        [0m
+ 73                                                                                              [33mq3 j22 EXITS-SERVER 0         [0m
+                                                                                                 [95mq3 j22 DEPART-VIA q4          [0m
+                                                                                                 [33mq3 j23 EXITS-SERVER 1         [0m
+                                                                                                 [95mq3 j23 DEPART-VIA q4          [0m
+                                                                                                 [96mq3 j31 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j31 ENTERS-SERVER 0        [0m
+                                                                                                 [96mq3 j32 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j32 ENTERS-SERVER 1        [0m
+ 74                                                                                                                             [33mq4 j18 EXITS-SERVER 0         [0m
+                                                                                                                                [95mq4 j18 DEPART-VIA out_final.wl[0m
+                                                                                                                                [33mq4 j19 EXITS-SERVER 1         [0m
+                                                                                                                                [95mq4 j19 DEPART-VIA out_final.wl[0m
+                                                                                                                                [96mq4 j22 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j22 ENTERS-SERVER 0        [0m
+                                                                                                                                [96mq4 j23 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j23 ENTERS-SERVER 1        [0m
+ 75 [32mq0 j60 TASK-END 0 "W 4"       [0m
+    [32mq0 j61 TASK-END 0 "W 1"       [0m
+    [33mq0 j60 EXITS-SERVER 0         [0m
+    [95mq0 j60 DEPART-VIA q1          [0m
+    [33mq0 j61 EXITS-SERVER 1         [0m
+    [95mq0 j61 DEPART-VIA q1          [0m
+    [93mq0 j71 ENTERS-SERVER 0        [0m
+    [92mq0 j71 TASK-START 0 "W 2"     [0m
+    [93mq0 j72 ENTERS-SERVER 1        [0m
+    [92mq0 j72 TASK-START 0 "W 1"     [0m
+ 76                                [32mq1 j49 TASK-END 1 "W 2"       [0m
+                                   [32mq1 j50 TASK-END 1 "W 2"       [0m
+                                   [33mq1 j49 EXITS-SERVER 0         [0m
+                                   [95mq1 j49 DEPART-VIA q2          [0m
+                                   [33mq1 j50 EXITS-SERVER 1         [0m
+                                   [95mq1 j50 DEPART-VIA q2          [0m
+                                   [96mq1 j60 ARRIVE-VIA q0          [0m
+                                   [93mq1 j60 ENTERS-SERVER 0        [0m
+                                   [92mq1 j60 TASK-START 1 "W 3"     [0m
+                                   [96mq1 j61 ARRIVE-VIA q0          [0m
+                                   [93mq1 j61 ENTERS-SERVER 1        [0m
+ 77                                                               [32mq2 j41 TASK-END 2 "W 3"       [0m
+                                                                  [33mq2 j41 EXITS-SERVER 0         [0m
+                                                                  [95mq2 j41 DEPART-VIA q3          [0m
+                                                                  [33mq2 j42 EXITS-SERVER 1         [0m
+                                                                  [95mq2 j42 DEPART-VIA q3          [0m
+                                                                  [96mq2 j49 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j49 ENTERS-SERVER 0        [0m
+                                                                  [96mq2 j50 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j50 ENTERS-SERVER 1        [0m
+                                                                  [92mq2 j50 TASK-START 2 "W 2"     [0m
+ 78                                                                                              [33mq3 j31 EXITS-SERVER 0         [0m
+                                                                                                 [95mq3 j31 DEPART-VIA q4          [0m
+                                                                                                 [33mq3 j32 EXITS-SERVER 1         [0m
+                                                                                                 [95mq3 j32 DEPART-VIA q4          [0m
+                                                                                                 [96mq3 j41 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j41 ENTERS-SERVER 0        [0m
+                                                                                                 [96mq3 j42 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j42 ENTERS-SERVER 1        [0m
+ 79                                                                                                                             [33mq4 j22 EXITS-SERVER 0         [0m
+                                                                                                                                [95mq4 j22 DEPART-VIA out_final.wl[0m
+                                                                                                                                [33mq4 j23 EXITS-SERVER 1         [0m
+                                                                                                                                [95mq4 j23 DEPART-VIA out_final.wl[0m
+                                                                                                                                [96mq4 j31 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j31 ENTERS-SERVER 0        [0m
+                                                                                                                                [96mq4 j32 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j32 ENTERS-SERVER 1        [0m
+ 80 [32mq0 j71 TASK-END 0 "W 2"       [0m
+    [32mq0 j72 TASK-END 0 "W 1"       [0m
+    [33mq0 j71 EXITS-SERVER 0         [0m
+    [95mq0 j71 DEPART-VIA q1          [0m
+    [33mq0 j72 EXITS-SERVER 1         [0m
+    [95mq0 j72 DEPART-VIA q1          [0m
+    [93mq0 j78 ENTERS-SERVER 0        [0m
+    [92mq0 j78 TASK-START 0 "W 2"     [0m
+    [93mq0 j79 ENTERS-SERVER 1        [0m
+    [92mq0 j79 TASK-START 0 "W 2"     [0m
+ 81                                [32mq1 j60 TASK-END 1 "W 3"       [0m
+                                   [33mq1 j60 EXITS-SERVER 0         [0m
+                                   [95mq1 j60 DEPART-VIA q2          [0m
+                                   [33mq1 j61 EXITS-SERVER 1         [0m
+                                   [95mq1 j61 DEPART-VIA q2          [0m
+                                   [96mq1 j71 ARRIVE-VIA q0          [0m
+                                   [93mq1 j71 ENTERS-SERVER 0        [0m
+                                   [92mq1 j71 TASK-START 1 "W 1"     [0m
+                                   [96mq1 j72 ARRIVE-VIA q0          [0m
+                                   [93mq1 j72 ENTERS-SERVER 1        [0m
+ 82                                                               [32mq2 j50 TASK-END 2 "W 2"       [0m
+                                                                  [33mq2 j49 EXITS-SERVER 0         [0m
+                                                                  [95mq2 j49 DEPART-VIA q3          [0m
+                                                                  [33mq2 j50 EXITS-SERVER 1         [0m
+                                                                  [95mq2 j50 DEPART-VIA q3          [0m
+                                                                  [96mq2 j60 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j60 ENTERS-SERVER 0        [0m
+                                                                  [92mq2 j60 TASK-START 2 "W 2"     [0m
+                                                                  [96mq2 j61 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j61 ENTERS-SERVER 1        [0m
+ 83                                                                                              [33mq3 j41 EXITS-SERVER 0         [0m
+                                                                                                 [95mq3 j41 DEPART-VIA q4          [0m
+                                                                                                 [33mq3 j42 EXITS-SERVER 1         [0m
+                                                                                                 [95mq3 j42 DEPART-VIA q4          [0m
+                                                                                                 [96mq3 j49 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j49 ENTERS-SERVER 0        [0m
+                                                                                                 [96mq3 j50 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j50 ENTERS-SERVER 1        [0m
+ 84                                                                                                                             [33mq4 j31 EXITS-SERVER 0         [0m
+                                                                                                                                [95mq4 j31 DEPART-VIA out_final.wl[0m
+                                                                                                                                [33mq4 j32 EXITS-SERVER 1         [0m
+                                                                                                                                [95mq4 j32 DEPART-VIA out_final.wl[0m
+                                                                                                                                [96mq4 j41 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j41 ENTERS-SERVER 0        [0m
+                                                                                                                                [96mq4 j42 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j42 ENTERS-SERVER 1        [0m
+ 85 [32mq0 j78 TASK-END 0 "W 2"       [0m
+    [32mq0 j79 TASK-END 0 "W 2"       [0m
+    [33mq0 j78 EXITS-SERVER 0         [0m
+    [95mq0 j78 DEPART-VIA q1          [0m
+    [33mq0 j79 EXITS-SERVER 1         [0m
+    [95mq0 j79 DEPART-VIA q1          [0m
+    [93mq0 j88 ENTERS-SERVER 0        [0m
+    [92mq0 j88 TASK-START 0 "W 2"     [0m
+    [93mq0 j89 ENTERS-SERVER 1        [0m
+    [92mq0 j89 TASK-START 0 "W 4"     [0m
+ 86                                [32mq1 j71 TASK-END 1 "W 1"       [0m
+                                   [33mq1 j71 EXITS-SERVER 0         [0m
+                                   [95mq1 j71 DEPART-VIA q2          [0m
+                                   [33mq1 j72 EXITS-SERVER 1         [0m
+                                   [95mq1 j72 DEPART-VIA q2          [0m
+                                   [96mq1 j78 ARRIVE-VIA q0          [0m
+                                   [93mq1 j78 ENTERS-SERVER 0        [0m
+                                   [96mq1 j79 ARRIVE-VIA q0          [0m
+                                   [93mq1 j79 ENTERS-SERVER 1        [0m
+                                   [92mq1 j79 TASK-START 1 "W 4"     [0m
+ 87                                                               [32mq2 j60 TASK-END 2 "W 2"       [0m
+                                                                  [33mq2 j60 EXITS-SERVER 0         [0m
+                                                                  [95mq2 j60 DEPART-VIA q3          [0m
+                                                                  [33mq2 j61 EXITS-SERVER 1         [0m
+                                                                  [95mq2 j61 DEPART-VIA q3          [0m
+                                                                  [96mq2 j71 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j71 ENTERS-SERVER 0        [0m
+                                                                  [96mq2 j72 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j72 ENTERS-SERVER 1        [0m
+ 88                                                                                              [33mq3 j49 EXITS-SERVER 0         [0m
+                                                                                                 [95mq3 j49 DEPART-VIA q4          [0m
+                                                                                                 [33mq3 j50 EXITS-SERVER 1         [0m
+                                                                                                 [95mq3 j50 DEPART-VIA q4          [0m
+                                                                                                 [96mq3 j60 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j60 ENTERS-SERVER 0        [0m
+                                                                                                 [96mq3 j61 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j61 ENTERS-SERVER 1        [0m
+ 89                                                                                                                             [33mq4 j41 EXITS-SERVER 0         [0m
+                                                                                                                                [95mq4 j41 DEPART-VIA out_final.wl[0m
+                                                                                                                                [33mq4 j42 EXITS-SERVER 1         [0m
+                                                                                                                                [95mq4 j42 DEPART-VIA out_final.wl[0m
+                                                                                                                                [96mq4 j49 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j49 ENTERS-SERVER 0        [0m
+                                                                                                                                [96mq4 j50 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j50 ENTERS-SERVER 1        [0m
+ 90 [32mq0 j88 TASK-END 0 "W 2"       [0m
+    [32mq0 j89 TASK-END 0 "W 4"       [0m
+    [33mq0 j88 EXITS-SERVER 0         [0m
+    [95mq0 j88 DEPART-VIA q1          [0m
+    [33mq0 j89 EXITS-SERVER 1         [0m
+    [95mq0 j89 DEPART-VIA q1          [0m
+ 91                                [32mq1 j79 TASK-END 1 "W 4"       [0m
+                                   [33mq1 j78 EXITS-SERVER 0         [0m
+                                   [95mq1 j78 DEPART-VIA q2          [0m
+                                   [33mq1 j79 EXITS-SERVER 1         [0m
+                                   [95mq1 j79 DEPART-VIA q2          [0m
+                                   [96mq1 j88 ARRIVE-VIA q0          [0m
+                                   [93mq1 j88 ENTERS-SERVER 0        [0m
+                                   [92mq1 j88 TASK-START 1 "W 3"     [0m
+                                   [96mq1 j89 ARRIVE-VIA q0          [0m
+                                   [93mq1 j89 ENTERS-SERVER 1        [0m
+                                   [92mq1 j89 TASK-START 1 "W 1"     [0m
+ 92                                                               [33mq2 j71 EXITS-SERVER 0         [0m
+                                                                  [95mq2 j71 DEPART-VIA q3          [0m
+                                                                  [33mq2 j72 EXITS-SERVER 1         [0m
+                                                                  [95mq2 j72 DEPART-VIA q3          [0m
+                                                                  [96mq2 j78 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j78 ENTERS-SERVER 0        [0m
+                                                                  [96mq2 j79 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j79 ENTERS-SERVER 1        [0m
+ 93                                                                                              [33mq3 j60 EXITS-SERVER 0         [0m
+                                                                                                 [95mq3 j60 DEPART-VIA q4          [0m
+                                                                                                 [33mq3 j61 EXITS-SERVER 1         [0m
+                                                                                                 [95mq3 j61 DEPART-VIA q4          [0m
+                                                                                                 [96mq3 j71 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j71 ENTERS-SERVER 0        [0m
+                                                                                                 [96mq3 j72 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j72 ENTERS-SERVER 1        [0m
+ 94                                                                                                                             [33mq4 j49 EXITS-SERVER 0         [0m
+                                                                                                                                [95mq4 j49 DEPART-VIA out_final.wl[0m
+                                                                                                                                [33mq4 j50 EXITS-SERVER 1         [0m
+                                                                                                                                [95mq4 j50 DEPART-VIA out_final.wl[0m
+                                                                                                                                [96mq4 j60 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j60 ENTERS-SERVER 0        [0m
+                                                                                                                                [96mq4 j61 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j61 ENTERS-SERVER 1        [0m
+ 96                                [32mq1 j88 TASK-END 1 "W 3"       [0m
+                                   [32mq1 j89 TASK-END 1 "W 1"       [0m
+                                   [33mq1 j88 EXITS-SERVER 0         [0m
+                                   [95mq1 j88 DEPART-VIA q2          [0m
+                                   [33mq1 j89 EXITS-SERVER 1         [0m
+                                   [95mq1 j89 DEPART-VIA q2          [0m
+ 97                                                               [33mq2 j78 EXITS-SERVER 0         [0m
+                                                                  [95mq2 j78 DEPART-VIA q3          [0m
+                                                                  [33mq2 j79 EXITS-SERVER 1         [0m
+                                                                  [95mq2 j79 DEPART-VIA q3          [0m
+                                                                  [96mq2 j88 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j88 ENTERS-SERVER 0        [0m
+                                                                  [96mq2 j89 ARRIVE-VIA q1          [0m
+                                                                  [93mq2 j89 ENTERS-SERVER 1        [0m
+ 98                                                                                              [33mq3 j71 EXITS-SERVER 0         [0m
+                                                                                                 [95mq3 j71 DEPART-VIA q4          [0m
+                                                                                                 [33mq3 j72 EXITS-SERVER 1         [0m
+                                                                                                 [95mq3 j72 DEPART-VIA q4          [0m
+                                                                                                 [96mq3 j78 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j78 ENTERS-SERVER 0        [0m
+                                                                                                 [96mq3 j79 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j79 ENTERS-SERVER 1        [0m
+ 99                                                                                                                             [33mq4 j60 EXITS-SERVER 0         [0m
+                                                                                                                                [95mq4 j60 DEPART-VIA out_final.wl[0m
+                                                                                                                                [33mq4 j61 EXITS-SERVER 1         [0m
+                                                                                                                                [95mq4 j61 DEPART-VIA out_final.wl[0m
+                                                                                                                                [96mq4 j71 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j71 ENTERS-SERVER 0        [0m
+                                                                                                                                [96mq4 j72 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j72 ENTERS-SERVER 1        [0m
+102                                                               [33mq2 j88 EXITS-SERVER 0         [0m
+                                                                  [95mq2 j88 DEPART-VIA q3          [0m
+                                                                  [33mq2 j89 EXITS-SERVER 1         [0m
+                                                                  [95mq2 j89 DEPART-VIA q3          [0m
+103                                                                                              [33mq3 j78 EXITS-SERVER 0         [0m
+                                                                                                 [95mq3 j78 DEPART-VIA q4          [0m
+                                                                                                 [33mq3 j79 EXITS-SERVER 1         [0m
+                                                                                                 [95mq3 j79 DEPART-VIA q4          [0m
+                                                                                                 [96mq3 j88 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j88 ENTERS-SERVER 0        [0m
+                                                                                                 [96mq3 j89 ARRIVE-VIA q2          [0m
+                                                                                                 [93mq3 j89 ENTERS-SERVER 1        [0m
+104                                                                                                                             [33mq4 j71 EXITS-SERVER 0         [0m
+                                                                                                                                [95mq4 j71 DEPART-VIA out_final.wl[0m
+                                                                                                                                [33mq4 j72 EXITS-SERVER 1         [0m
+                                                                                                                                [95mq4 j72 DEPART-VIA out_final.wl[0m
+                                                                                                                                [96mq4 j78 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j78 ENTERS-SERVER 0        [0m
+                                                                                                                                [96mq4 j79 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j79 ENTERS-SERVER 1        [0m
+108                                                                                              [33mq3 j88 EXITS-SERVER 0         [0m
+                                                                                                 [95mq3 j88 DEPART-VIA q4          [0m
+                                                                                                 [33mq3 j89 EXITS-SERVER 1         [0m
+                                                                                                 [95mq3 j89 DEPART-VIA q4          [0m
+109                                                                                                                             [33mq4 j78 EXITS-SERVER 0         [0m
+                                                                                                                                [95mq4 j78 DEPART-VIA out_final.wl[0m
+                                                                                                                                [33mq4 j79 EXITS-SERVER 1         [0m
+                                                                                                                                [95mq4 j79 DEPART-VIA out_final.wl[0m
+                                                                                                                                [96mq4 j88 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j88 ENTERS-SERVER 0        [0m
+                                                                                                                                [96mq4 j89 ARRIVE-VIA q3          [0m
+                                                                                                                                [93mq4 j89 ENTERS-SERVER 1        [0m
+114                                                                                                                             [33mq4 j88 EXITS-SERVER 0         [0m
+                                                                                                                                [95mq4 j88 DEPART-VIA out_final.wl[0m
+                                                                                                                                [33mq4 j89 EXITS-SERVER 1         [0m
+                                                                                                                                [95mq4 j89 DEPART-VIA out_final.wl[0m

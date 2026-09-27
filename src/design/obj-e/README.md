@@ -11,7 +11,7 @@ Engine behavior is defined in [Objective B](../obj-b/README.md). This note cover
 | Multi-queue sim | `implementation/obj-e/multi-queue-sim/` | C++ binary. Compiles the Obj B engine under the Obj E path. |
 | Make queue inputs | `implementation/obj-e/multi-queue-sim/tooling/make-queue-inputs/` | Python CLI. Writes `in0.wl` and a linear-chain `qconf.csv`. |
 | Queue studio | `implementation/obj-e/multi-queue-sim/tooling/queue-studio/` | Interactive CLI. Prompts for parameters, calls the maker, optionally runs the sim. |
-| Pretty-print events | not started | Aligned terminal view of `events.log`. Sketch: [pretty-print-event.pseudo](pretty-print-event.pseudo). |
+| Pretty-print events | [implementation/obj-e/pretty-print-events/](../../implementation/obj-e/pretty-print-events/) | Aligned terminal view of `events.log`. Sketch: [pretty-print-event.pseudo](pretty-print-event.pseudo). |
 | Config from network | not started | Build `qconf.csv` from a network matrix. [create-config-network.pseudo](create-config-network.pseudo) and [multi-queue-sim.pseudo](multi-queue-sim.pseudo) are empty. |
 
 Language: the simulator is C++17. Generators and the studio are Python. Analysis tools that consume the logs belong to Objective C and are not implemented yet.
@@ -84,6 +84,6 @@ Tokens include `ARRIVE-VIA`, `DEPART-VIA`, `ENTERS-SERVER`, `EXITS-SERVER`, `TAS
 
 ## Future tools
 
-Pretty-print groups events by time, then by queue, and writes an aligned column per queue. Widths use the visible text so ANSI color codes do not shift the columns. The sketch opens the result in `less -R`.
+Pretty-print groups events by time, then by queue, and writes an aligned column per queue. Widths use the visible text so ANSI color codes do not shift the columns. The implementation is [pretty-print-events](../../implementation/obj-e/pretty-print-events/). A terminal session opens the result in `less -R` when that pager is available.
 
 Config-from-network will turn a network description into the same nine-column `qconf.csv`. Until that exists, fan-out configs are written by hand, and linear chains come from the tooling.
