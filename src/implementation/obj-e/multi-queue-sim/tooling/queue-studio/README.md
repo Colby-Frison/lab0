@@ -57,7 +57,7 @@ Press Enter to keep the bracketed default.
 
 | # | Objective | Name | Will read |
 |---|-----------|------|-----------|
-| 1 | Obj C | filter-by-queue | events |
+| 1 | Obj C | filter-by-queue | qmet |
 | 2 | Obj C | filter-by-job | events |
 | 3 | Obj C | compute-use | qmet |
 | 4 | Obj C | plot-use | quse csv |

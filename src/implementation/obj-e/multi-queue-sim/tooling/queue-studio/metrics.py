@@ -20,7 +20,7 @@ class MetricTool:
 
 
 CATALOG: list[MetricTool] = [
-    MetricTool("Obj C", "filter-by-queue", "src/implementation/obj-c/filter-by-queue", "events", "Keep event lines for selected queue ids."),
+    MetricTool("Obj C", "filter-by-queue", "src/implementation/obj-c/filter-by-queue", "qmet", "Keep qmet rows for selected queue ids."),
     MetricTool("Obj C", "filter-by-job", "src/implementation/obj-c/filter-by-job", "events", "Keep event lines for selected job ids."),
     MetricTool("Obj C", "compute-use", "src/implementation/obj-c/compute-use", "qmet", "Utilization, saturation, and errors over time windows."),
     MetricTool("Obj C", "plot-use", "src/implementation/obj-c/plot-use", "quse csv", "Plot USE series."),
