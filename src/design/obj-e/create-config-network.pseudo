@@ -1,0 +1,141 @@
+INPUT:
+    network_path
+    output_path
+    queue_max_size       // default 8
+    num_servers          // default 1
+    server_function      // default "Sub-10"
+    server_function_rate // default 10
+    undirected           // default false
+    ignore_weights       // default false
+    explicit_sources     // zero or more NODE=WORKLOAD_FILE values
+    explicit_sinks       // zero or more NODE=WORKLOAD_FILE values
+    auto_endpoints       // default true
+
+OUTPUT_HEADER = [
+    "Sys ID",
+    "Queue Max Size",
+    "Num. Servers",
+    "Server Function",
+    "Server Function Rate",
+    "Source",
+    "Sink",
+    "Edges in",
+    "Edges out"
+]
+
+function read_network(network_path, undirected, ignore_weights):
+    lines = read_all_lines(network_path)
+    first_data_line = first nonblank line
+
+    if first_data_line starts with "%%MatrixMarket":
+        header = parse_matrix_market_header(first_data_line)
+        require (header.object == "matrix")
+        require (header.storage == "coordinate")
+        require (header.field in ["pattern", "integer", "real"])
+        require (header.symmetry in ["general", "symmetric"])
+
+        dimensions = first following line w/o "%"
+        (num_rows, num_columns, declared_edges) = parse(dimensions)
+        require (num_rows == num_columns)
+
+        // Matrix Market node numbers are one-based. Include every declared
+        // node, including nodes that never appear in an edge.
+        nodes = ["1", "2", ..., string(num_rows)]
+
+        for each remaining non-comment line:
+            parse "u v" for pattern data or "u v weight" otherwise
+            validate (1 <= u,v <= num_rows)
+            validate weight is finite and positive unless ignore_weights
+            add edge (u, v, weight or NONE)
+
+            if header.symmetry == "symmetric" OR undirected:
+                if u != v:
+                    add reverse edge (v, u, weight or NONE)
+
+        require (number of stored input rows == declared_edges)
+
+    else:
+        // Plain edge-list form from graph datasets: u v [weight].
+        // Lines beginning with # or % are comments.
+        for each nonblank, non-comment line:
+            parse "u v" or "u v weight"
+            add u and v to nodes
+            validate weight is finite and positive unless ignore_weights
+            add edge (u, v, weight or NONE)
+            if undirected AND u != v:
+                add reverse edge (v, u, weight or NONE)
+
+        sort nodes numerically when possible, otherwise lexically
+
+    remove exact duplicate edges
+    reject duplicate edges that disagree about weight
+    return Network(nodes, edges)
+
+
+function build_queue_config(network, options):
+    // Stable q0..qN-1 names keep qmet queue IDs compact even when the input
+    // graph uses sparse IDs such as 1740 and 6478.
+    node_to_queue = empty map
+    for index, node in enumerate(network.nodes):
+        node_to_queue[node] = "q" + string(index)
+
+    incoming = map every node to empty list
+    outgoing = map every node to empty list
+
+    for edge in network.edges:
+        outgoing[edge.u].append((edge.v, edge.weight))
+        incoming[edge.v].append(edge.u)
+
+    if auto_endpoints:
+        for node in network.nodes:
+            if incoming[node] is empty:
+                sources[node] = "in" + queue_index(node) + ".wl"
+            if outgoing[node] is empty:
+                sinks[node] = "out" + queue_index(node) + ".wl"
+
+    // Explicit assignments override automatically inferred filenames
+    apply explicit_sources to sources
+    apply explicit_sinks to sinks
+
+    rows = []
+    for node in network.nodes:
+        qid = node_to_queue[node]
+        edges_in = format_list(node_to_queue[n] for n in incoming[node])
+        edges_out = format_weighted_list(
+            node_to_queue[n] + optional(":" + weight)
+            for (n, weight) in outgoing[node]
+        )
+
+        rows.append([
+            qid,
+            queue_max_size,
+            num_servers,
+            server_function,
+            server_function_rate,
+            sources.get(node, ""),
+            sinks.get(node, ""),
+            edges_in,
+            edges_out
+        ])
+
+    return rows, node_to_queue
+
+
+function main(arguments):
+    options = parse_cli(arguments)
+    require (queue_max_size >= 0)
+    require (num_servers > 0)
+    require (server_function_rate > 0)
+
+    network = read_network(
+        options.network,
+        options.undirected,
+        options.ignore_weights
+    )
+    require (network has at least one node)
+
+    rows, mapping = build_queue_config(network, options)
+
+    open options.out as CSV output:
+        write OUTPUT_HEADER
+        write every row with a real CSV writer
