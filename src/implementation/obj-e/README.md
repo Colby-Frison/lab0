@@ -17,6 +17,7 @@ obj-e/
       make-queue-inputs/    flag CLI: in0.wl + linear qconf.csv
       queue-studio/         prompted session; optional immediate run
     runs/                   script and studio output (gitignored)
+  pretty-print-events/     column view of events.log
 ```
 
 `CMakeLists.txt` points at `../../obj-b/simple-queue-sim` and compiles those sources. Do not copy the engine.
@@ -28,7 +29,7 @@ obj-e/
 | Multi-queue sim | [multi-queue-sim/](multi-queue-sim/) | Builds the Obj B engine. A multi-row `qconf.csv` is a network. |
 | Make queue inputs | [tooling/make-queue-inputs/](multi-queue-sim/tooling/make-queue-inputs/) | Writes `in0.wl` and a linear-chain config. |
 | Queue studio | [tooling/queue-studio/](multi-queue-sim/tooling/queue-studio/) | Prompts, generates, can run the sim. Metric menu is a stub. |
-| Pretty-print events | — | Not started. |
+| Pretty-print events | [pretty-print-events/](pretty-print-events/) | Column-per-queue view of the event log. |
 | Config from network | — | Not started. |
 
 ## Which entry to use
