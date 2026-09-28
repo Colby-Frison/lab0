@@ -1,11 +1,13 @@
-"""Boilerplate hooks for Obj C analysis and the remaining Obj E tools.
+"""Hooks for Obj C analysis and the remaining Obj E tools.
 
-Each entry names the future implementation path and the simulator artifact it
-will read. `run` raises NotImplementedError until that tool exists.
+pretty-print-events runs the implementation next to the simulator. The other
+entries name a future path and raise NotImplementedError.
 """
 
 from __future__ import annotations
 
+import subprocess
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -34,7 +36,20 @@ CATALOG: list[MetricTool] = [
 ]
 
 
+def _pretty_print(events: Path) -> None:
+    script = (
+        Path(__file__).resolve().parents[3]
+        / "pretty-print-events"
+        / "pretty_print_events.py"
+    )
+    subprocess.run([sys.executable, str(script), str(events)], check=True)
+
+
 def run(tool: MetricTool, artifacts: dict[str, Path] | None) -> None:
+    events = artifacts.get("events") if artifacts else None
+    if tool.name == "pretty-print-events" and events is not None and Path(events).is_file():
+        _pretty_print(Path(events))
+        return
     available = "none yet"
     if artifacts:
         present = [name for name in ("qmet", "events", "workload", "config", "sink") if Path(artifacts[name]).is_file()]

@@ -53,7 +53,7 @@ Press Enter to keep the bracketed default.
 
 ## Metric menu
 
-[metrics.py](metrics.py) is a catalog, not an analysis implementation. Choosing a number prints the tool's purpose, the artifact it will read, the future source path, and which of the current run's files already exist. Enter returns to the shell. None of the entries transform data.
+[metrics.py](metrics.py) lists the analysis tools. Choosing pretty-print-events runs that tool on the event log from this session. The other entries print their purpose and the file they will read, and report that they are not implemented yet. Enter returns to the shell.
 
 | # | Objective | Name | Will read |
 |---|-----------|------|-----------|
