@@ -1,0 +1,2 @@
+scenario,title,study,level,total_servers,patients,completed,dropped,drop_pct,horizon_steps,drain_steps,throughput_per_step,los_mean,los_median,los_p10,los_p90,los_mean_min,los_p90_min,treatment_wait_mean,max_util_station,max_util,lab_util
+load-quiet,Quiet: half the arrival rate,load,0.5,24,2933,2933,0,0.0,2998,27,0.97,12.63,12.0,7.0,19.0,126.3,190.0,0.25,pod_a,0.43,0.357

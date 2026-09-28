@@ -1,0 +1,2 @@
+scenario,title,study,level,total_servers,patients,completed,dropped,drop_pct,horizon_steps,drain_steps,throughput_per_step,los_mean,los_median,los_p10,los_p90,los_mean_min,los_p90_min,treatment_wait_mean,max_util_station,max_util,lab_util
+scale-1k,"1,000 patients (~3.5 days)",scale,1000,24,938,932,6,0.64,499,14,1.817,13.97,13.0,7.0,22.0,139.7,220.0,1.61,pod_b,0.852,0.685

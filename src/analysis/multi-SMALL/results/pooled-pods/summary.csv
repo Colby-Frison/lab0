@@ -1,0 +1,2 @@
+scenario,title,study,level,total_servers,patients,completed,dropped,drop_pct,horizon_steps,drain_steps,throughput_per_step,los_mean,los_median,los_p10,los_p90,los_mean_min,los_p90_min,treatment_wait_mean,max_util_station,max_util,lab_util
+pooled-pods,Pods A+B pooled into one 6-bed pod,targeted,,24,2933,2933,0,0.0,1499,34,1.913,13.78,13.0,7.0,21.0,137.8,210.0,1.09,pooled_pod,0.848,0.714

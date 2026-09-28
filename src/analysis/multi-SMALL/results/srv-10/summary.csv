@@ -1,0 +1,2 @@
+scenario,title,study,level,total_servers,patients,completed,dropped,drop_pct,horizon_steps,drain_steps,throughput_per_step,los_mean,los_median,los_p10,los_p90,los_mean_min,los_p90_min,treatment_wait_mean,max_util_station,max_util,lab_util
+srv-10,-10% servers,servers,-0.1,22,2933,2737,196,6.68,1499,26,1.795,15.93,15.0,8.0,27.0,159.3,270.0,3.71,pod_b,0.991,0.714

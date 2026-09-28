@@ -1,0 +1,12 @@
+Sys ID,Queue Max Size,Num. Servers,Server Function,Server Function Rate,Source,Sink,Edges in,Edges out
+q0,30,3,Sub-1,1,workloads/arrivals-0-499.wl,,[],[q1:0.001]
+q1,20,3,Sub-1,1,,,[q0],[q2:0.004,q3:0.002,q4:0.002,q5:0.001,q6:0.001,q7:0.001]
+q2,15,2,Sub-3*,1,,,[q1],[q9:0.001]
+q3,6,3,Sub-2*,2,,,[q1,q5,q6,q7],[q8:0.001]
+q4,6,3,Sub-2*,2,,,[q1,q5,q6,q7],[q8:0.001]
+q5,20,1,Sub-1,4,,,[q1],[q3:0.001,q4:0.001]
+q6,10,1,Sub-1,2,,,[q1],[q3:0.001,q4:0.001]
+q7,10,1,Sub-1,3,,,[q1],[q3:0.001,q4:0.001]
+q8,20,2,Sub-1,1,,,[q3,q4],[q9:0.004,q10:0.001]
+q9,20,3,Sub-3*,1,,runs/scale-1k/out_discharge.wl,[q2,q8],[]
+q10,6,2,Sub-3*,6,,runs/scale-1k/out_admit.wl,[q8],[]
