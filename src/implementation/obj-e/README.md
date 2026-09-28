@@ -30,7 +30,7 @@ obj-e/
 | Make queue inputs | [tooling/make-queue-inputs/](multi-queue-sim/tooling/make-queue-inputs/) | Writes `in0.wl` and a linear-chain config. |
 | Queue studio | [tooling/queue-studio/](multi-queue-sim/tooling/queue-studio/) | Prompts, generates, can run the sim. Metric menu is a stub. |
 | Pretty-print events | [pretty-print-events/](pretty-print-events/) | Column-per-queue view of the event log. |
-| Config from network | — | Not started. |
+| Config from network | [create-config-network/](create-config-network/) | Converts MTX/edge-list graphs into `qconf.csv`. |
 
 ## Which entry to use
 
@@ -53,3 +53,11 @@ Manual run, after `cmake -S . -B build` and `cmake --build build`:
 ```
 
 Details, flags, and output files are in [multi-queue-sim/README.md](multi-queue-sim/README.md).
+
+Run the Objective E tests from this directory with:
+
+```bash
+./run-all-tests.sh
+# Windows PowerShell:
+.\run-all-tests.ps1
+```
