@@ -1,7 +1,7 @@
-function filter_by_job_log(input_log, output_log, target_job):
+function filter_by_job_log(input_log, output_log, target_jobs):
     with input_log and output_log:
         for line in input_log:
             tokens = line.split()
-            if target_job in tokens: output_log.write(line)
+            if len(tokens) >= 2 and tokens[1] in target_jobs: output_log.write(line)
 
-filter_by_job_log('events-single.log', 'j0_events.log', 'j0')
+filter_by_job_log('events-single.log', 'j0_events.log', {'j0'})

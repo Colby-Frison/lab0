@@ -21,8 +21,8 @@ filter-by-queue \
 # 2. Filter events by Job ID
 filter-by-job \
   --events events.log \
-  --job JOB_ID \              # e.g., j1
-  [--out jX_events.log]       # default: <JOB_ID>_events.log
+  --jobs JOB_ID[,JOB_ID...] \ # e.g., j1 or 1 (1 is accepted as j1)
+  [--out j1_events.log]       # default: stdout
 
 ```
 
@@ -62,7 +62,7 @@ Input `events.log`:
 ...
 ```
 
-Command: `filter-by-job --events events.log --job j1`
+Command: `filter-by-job --events events.log --jobs j1 --out j1_events.log`
 Output `j1_events.log`:
 ```text
 10 j1 IN q0 ARRIVE-VIA in0.wl
@@ -75,5 +75,5 @@ Output `j1_events.log`:
 
 1. Parse CLI parameters.
 2. **Queue filter:** Use `pandas` to read `qmet.csv`, read every cell as a string (`dtype=str`), apply a dataframe boolean mask (`df[df['queue-sys-id'].isin(qids)]`), and export via `to_csv(index=False)`.
-3. **Job filter:** Since the event log is space-delimited text and tasks can contain spaces, `pandas` might struggle with formatting. A standard Python file reader is safer: check if the second token in each line matches the target `job_id`.
+3. **Job filter:** Since the event log is space-delimited text and tasks can contain spaces, `pandas` might struggle with formatting. A standard Python file reader is safer: check if the second token in each line matches one of the target job ids exactly (not any token, and not a substring, so `j1` never matches `j10`).
 4. Write the filtered streams to the `--out` files.
