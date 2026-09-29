@@ -10,7 +10,8 @@ Python analysis tools that consume the Obj B / Obj E simulator outputs
 | Plot system metrics | `plot-sys-metrics/` | `plot_sys_metrics.py` | `sysmetrics.csv` → `resplot.png` | Implemented |
 | Derive event (job) metrics | `derive-event-metrics/` | `derive_event_metrics.py` | `events.log` → `emetrics.csv` | Implemented |
 | Plot event metrics | `plot-event-metrics/` | — | `emetrics.csv` → `png` | Not started |
-| Filter by queue / by job | `filters/` | — | `qmet.csv` / `events.log` → subset | Not started |
+| Filter by queue | `filter-by-queue/` | `filter_by_queue.py` | `qmet.csv` → `qmet.csv` subset | Implemented |
+| Filter by job | `filters/` | — | `events.log` → subset | Not started |
 | Compute USE / plot USE | `USE/` | — | `qmet.csv` → `quse.csv` → `use.png` | Not started |
 | Create event trace | `create-etrace/` | — | `events.log` → `etrace.png` | Not started |
 
@@ -31,6 +32,10 @@ python plot-sys-metrics/plot_sys_metrics.py \
 # Job view: one row per (job, queue) visit
 python derive-event-metrics/derive_event_metrics.py \
   --events ../obj-b/simple-queue-sim/runs/pipeline/events.log --out /tmp/emetrics.csv
+
+# Queue view: keep only the qmet rows of queue 0 (or a list: --qid 0,2)
+python filter-by-queue/filter_by_queue.py \
+  --qmet ../obj-b/simple-queue-sim/runs/pipeline/qmet.csv --qid 0 --out /tmp/q0_metrics.csv
 ```
 
 Requires Python 3 with `numpy`, `pandas`, and `matplotlib`.
@@ -45,4 +50,4 @@ python -m unittest discover -s tests -v
 ```
 
 Fixtures under `tests/fixtures/` are the PDF walkthrough log, a two-queue transfer
-log, and a `QUEUE-FULL` log.
+log, a `QUEUE-FULL` log, and a three-queue `qmet-multi.csv`.
