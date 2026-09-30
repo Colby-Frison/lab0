@@ -9,7 +9,7 @@ Python analysis tools that consume the Obj B / Obj E simulator outputs
 | Derive system metrics | `derive-sys-metrics/` | `derive_sys_metrics.py` | `events.log` → `sysmetrics.csv` | Implemented |
 | Plot system metrics | `plot-sys-metrics/` | `plot_sys_metrics.py` | `sysmetrics.csv` → `resplot.png` | Implemented |
 | Derive event (job) metrics | `derive-event-metrics/` | `derive_event_metrics.py` | `events.log` → `emetrics.csv` | Implemented |
-| Plot event metrics | `plot-event-metrics/` | — | `emetrics.csv` → `png` | Not started |
+| Plot event metrics | `plot-derive-event-metrics/` | `plot_derive_event_metrics.py` | `emetrics.csv` → `png` | Implemented |
 | Filter by queue | `filter-by-queue/` | `filter_by_queue.py` | `qmet.csv` → `qmet.csv` subset | Implemented |
 | Filter by job | `filters/` | — | `events.log` → subset | Not started |
 | Compute USE / plot USE | `USE/` | — | `qmet.csv` → `quse.csv` → `use.png` | Not started |
