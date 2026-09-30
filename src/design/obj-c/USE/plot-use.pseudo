@@ -1,32 +1,22 @@
-import pandas as pd
-import matplotlib.pyplot as plt
+# Three stacked panels from quse.csv, sharing the time axis.
+# Utilization, saturation, and error rate.
+# Several queues: one hue per queue. Window 10 is light, 100 is solid,
+# 1000 is dark and dashed.
+# One queue: the slide colors. Blue utilization, a yellow saturation area,
+# a red error rate.
+# The legend sits beside the figure once. It names the three windows, and
+# each queue when there is more than one.
+# Saturation's 10-step series is a filled area. The 100 and 1000 series are lines.
 
-function plot_use_metrics(csv_filename):
-    // Assuming header format: time-step,Utilization(10),...,Saturation(10),...,Errors(10),...
-    df = pd.read_csv(csv_filename)
-    
-    // Plots
-    fig, (ax1, ax2, ax3) = plt.subplots(3, 1, ...)
-    time = df['time-step']
+function plot_use(quse, out):
+    df = read quse.csv
+    if qid filter is set: keep those queues
+    fig = three panels sharing the time axis
 
-    // Utilization
-    ax1.plot(time, df['Utilization(10)'], ...)
-    ax1.plot(time, df['Utilization(100)'], ...)
-    ax1.plot(time, df['Utilization(1000)'], ...)
-    // Plot customizations here...
+    for qid, hue in zip(queues, palette):
+        panel utilization: plot Utilization(10/100/1000), y from 0 to 1
+        panel saturation: fill Saturation(10), plot Saturation(100/1000)
+        panel error rate: plot Errors(10/100/1000)
 
-    // Saturation
-    ax2.plot(time, df['Saturation(10)'], ...)
-    ax2.plot(time, df['Saturation(100)'], ...)
-    ax2.plot(time, df['Saturation(1000)'], ...)
-    // Plot customizations here...
-
-    // Errors
-    ax3.plot(time, df['Errors(10)'], ...)
-    ax3.plot(time, df['Errors(100)'], ...)
-    ax3.plot(time, df['Errors(1000)'], ...)
-    // Plot customizations here...
-
-    savefig('use_metrics.png')
-
-plot_use_metrics('quse.csv')
+    legend once, beside the panels
+    save fig to out
