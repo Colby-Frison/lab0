@@ -12,8 +12,9 @@ Python analysis tools that consume the Obj B / Obj E simulator outputs
 | Plot event metrics | `plot-derive-event-metrics/` | `plot_derive_event_metrics.py` | `emetrics.csv` → `png` | Implemented |
 | Filter by queue | `filter-by-queue/` | `filter_by_queue.py` | `qmet.csv` → `qmet.csv` subset | Implemented |
 | Filter by job | `filter-by-job/` | `filter_by_job.py` | `events.log` → `events.log` subset | Implemented |
-| Compute USE / plot USE | `USE/` | — | `qmet.csv` → `quse.csv` → `use.png` | Not started |
-| Create event trace | `create-etrace/` | — | `events.log` → `etrace.png` | Not started |
+| Compute USE | `compute-use/` | `compute_use.py` | `qmet.csv` + config → `quse.csv` | Implemented |
+| Plot USE | `plot-use/` | `plot_use.py` | `quse.csv` → `use.png` | Implemented |
+| Create event trace | `create-event-trace/` | `create_event_trace.py` | `events.log` → `etrace.png` | Implemented |
 
 See each subdirectory README for CLI details and metric definitions.
 
@@ -40,6 +41,12 @@ python filter-by-queue/filter_by_queue.py \
 # Trace one job: keep only the event-log lines of j0 (or a list: --jobs 0,1)
 python filter-by-job/filter_by_job.py \
   --events ../obj-b/simple-queue-sim/runs/pipeline/events.log --jobs 0 --out /tmp/j0_events.log
+
+# USE: utilization, waiting jobs, and errors over 10 / 100 / 1000 steps
+python compute-use/compute_use.py \
+  --qmet ../obj-b/simple-queue-sim/runs/pipeline/qmet.csv \
+  --config ../../examples/obj-b/simple-queue-config-ex.csv --out /tmp/quse.csv
+python plot-use/plot_use.py --quse /tmp/quse.csv --out /tmp/use.png
 ```
 
 Requires Python 3 with `numpy`, `pandas`, and `matplotlib`.
