@@ -1,0 +1,2 @@
+scenario,title,study,level,total_servers,packets,delivered,dropped,drop_pct,horizon_steps,drain_steps,throughput_per_step,latency_mean,latency_median,latency_p10,latency_p90,busiest_as,max_util,hub_util,mean_util
+scale-300k,"Scale: 300,000 packets",scale,300000.0,6555,300333,300325,8,0.0,15000,10,20.008,7.13,7.0,7.0,8.0,q456 (AS 456),0.638,0.223,0.01

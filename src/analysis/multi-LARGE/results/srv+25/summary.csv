@@ -1,0 +1,2 @@
+scenario,title,study,level,total_servers,packets,delivered,dropped,drop_pct,horizon_steps,drain_steps,throughput_per_step,latency_mean,latency_median,latency_p10,latency_p90,busiest_as,max_util,hub_util,mean_util
+srv+25,Servers +25%,servers,0.25,8194,100171,100171,0,0.0,5000,10,19.994,7.06,7.0,7.0,7.0,q3058 (AS 3058),0.531,0.173,0.009
