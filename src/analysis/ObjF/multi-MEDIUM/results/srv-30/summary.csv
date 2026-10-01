@@ -1,0 +1,2 @@
+scenario,study,seed,jobs,load,requested_resource_change_pct,total_servers,actual_resource_change_pct,completed,dropped,drop_pct,horizon,last_arrival,drain_ticks,throughput,latency_mean,latency_median,latency_p90,max_utilization,max_mean_waiting,peak_waiting,interior_start,interior_end_exclusive
+srv-30,servers,5113,30000,1.0,-30.000000000000004,1124,-30.01245330012453,29291,709,2.3633333333333333,1074,992,81,27.272811918063315,17.961285036359293,13.0,27.0,0.994413407821229,28.303538175046555,32,99,892
