@@ -6,3 +6,4 @@ Documentation/local-notes/*
 **/tests/fixtures/_tmp_config.csv
 **/runs/
 *pycache*/
+.vscode

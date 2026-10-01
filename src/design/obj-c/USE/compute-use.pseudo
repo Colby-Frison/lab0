@@ -1,55 +1,40 @@
-history_busy = []
-history_qlen = []
-history_errors = []
+# Post-process qmet.csv into per-queue USE windows.
+# Not part of the simulator loop. Each queue is its own series.
 
-function log_state(server_busy_status, current_queue_length, drops_in_this_step):
-    // Record for current time step
-    history_busy.append(1 if server_busy_status else 0)
-    history_qlen.append(current_queue_length)
-    history_errors.append(drops_in_this_step)
-    
-    // Maintain max sliding window size
-    if len(history_busy) > 1000:
-        history_busy.pop(0)
-        history_qlen.pop(0)
-        history_errors.pop(0)
+function normalize_qid(token):
+    # "q0" / "007" -> "0" so the config matches qmet.csv
+    return decimal digits at the end of token
 
-function compute_USE(window_size):
-    // Grab only the last 10/100/1000
-    window_busy = history_busy[-window_size:]
-    window_qlen = history_qlen[-window_size:]
-    window_errors = history_errors[-window_size:]
-    
-    n = len(window_busy)
-    if n == 0:
-        return 0.0, 0.0, 0
-        
-    utilization = sum(window_busy) / n
-    saturation = sum(window_qlen) / n
-    errors = sum(window_errors)
-    
-    return utilization, saturation, errors
+function load_server_counts(qconf):
+    # Sys ID -> Num. Servers. Later commas inside [edges] do not affect these fields.
+    for row in qconf:
+        counts[normalize_qid(row.sys_id)] = row.num_servers
+    return counts
 
-// Main
-for t in range(150):
-    drops_this_step = 0
-    
-    // Simulation logic here...
-    // If a job arrives and queue is full, drops_this_step += 1
+function window_stats(values, end, size, how):
+    # Only the steps that exist: start = max(0, end - size + 1)
+    window = values[start : end + 1]
+    if how == mean: return sum(window) / length(window)
+    return sum(window)
 
-    // Determine state at end of time step 
-    server_is_busy = (q0_server_finish != -1)
-    current_q_len = len(q0_queue)
-    
-    // Log the state
-    log_state(server_is_busy, current_q_len, drops_this_step)
-    
-    // Compute USE metrics
-    u_10, s_10, e_10 = compute_USE(10)
-    u_100, s_100, e_100 = compute_USE(100)
-    u_1000, s_1000, e_1000 = compute_USE(1000)
-    
-    // Output to quse.csv here
-    print(f"{t},{u_10},{s_10},{e_10},{u_100},{s_100},{e_100},{u_1000},{s_1000},{e_1000}")
-
-    // Logic for other features here...
+function compute_use(qmet, server_counts):
+    columns = time-step, queue-sys-id,
+              Utilization(10), Saturation(10), Errors(10),
+              Utilization(100), Saturation(100), Errors(100),
+              Utilization(1000), Saturation(1000), Errors(1000)
+    rows = []
+    for qid, series in group qmet by queue-sys-id, time order:
+        if qid not in server_counts: error
+        servers = server_counts[qid]
+        busy = [in_service / servers for each step]
+        waiting = [num-jobs-in-queue for each step]
+        drops = [num-of-errors for each step]
+        for i, step in enumerate(series):
+            row = {time-step: step.time, queue-sys-id: qid}
+            for size in [10, 100, 1000]:
+                row[Utilization(size)] = window_stats(busy, i, size, mean)
+                row[Saturation(size)] = window_stats(waiting, i, size, mean)
+                row[Errors(size)] = window_stats(drops, i, size, sum)
+            rows.append(row)
+    sort rows by time-step, then queue id
+    write quse.csv

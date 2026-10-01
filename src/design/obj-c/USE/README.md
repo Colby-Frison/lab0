@@ -1,72 +1,48 @@
 # USE Metrics: Compute and Plot
 
-## Goal
+Given `qmet.csv` and the queue config, write `quse.csv`: utilization, saturation, and errors for each queue over sliding windows of 10, 100, and 1000 steps. `plot-use` draws those three series.
 
-Given the queue metrics log (`qmet.csv`), compute the USE (Utilization, Saturation, Errors) metrics for the system and emit them to a synthetic summary file (`quse.csv`). Then, given the computed USE metrics, generate a clear visualization (`quse.png`) to analyze system health and capacity constraints over time.
+This is post-processing. The simulator already recorded the per-step counts.
 
-## CLI sketch
-
-All parameters are command-line arguments (required + optional), allowing these to be run as sequential pipeline steps:
+## CLI
 
 ```bash
-# 1. Compute the metrics
-compute-use \
-  --qmet qmet.csv \
-  --config qconf.csv \
-  [--out quse.csv]            # default: quse.csv
-
-# 2. Generate the visual
-plot-use \
-  --quse quse.csv \
-  [--out quse.png]            # default: quse.png
-
+python compute_use.py --qmet qmet.csv --config qconf.csv [--out quse.csv]
+python plot_use.py --quse quse.csv [--qid 0[,1,...]] [--out use.png] [--title TEXT] [--xlim A:B]
 ```
 
-Notes:
+`--config` supplies `Num. Servers`. Utilization divides busy servers by that count. `q0` in the config and `0` in `qmet.csv` are the same queue.
 
-* `--config` is required for `compute-use` to determine the maximum capacity (number of servers and max queue size) needed to calculate utilization and saturation ratios.
-* `plot-use` assumes `quse.csv` is correctly formatted and relies on Matplotlib to handle the rendering.
+## Definitions
 
-## USE Metric Definitions
+[Gregg's USE method](https://www.brendangregg.com/usemethod.html) is the resource check (utilization, saturation, errors). The formulas below are the queue slide applied to `qmet.csv`.
 
-Align with standard systems analysis methodology for the queueing simulator:
+| Metric | Window of size $W$ | Unit |
+|--------|--------------------|------|
+| Utilization | Mean of `num-jobs-in-service / Num. Servers` | fraction in $[0, 1]$ when no more jobs are in service than there are servers |
+| Saturation | Mean of `num-jobs-in-queue` | jobs waiting, not a fraction of queue capacity |
+| Errors | Sum of `num-of-errors` | jobs dropped in the window |
 
-| Metric | Derivation from `qmet.csv` & config | Insight |
-| --- | --- | --- |
-| **Utilization** | `num-jobs-in-service` / `Num. Servers` | What percentage of the processing capacity is actively busy? |
-| **Saturation** | `num-jobs-in-queue` (% of `Queue Max Size`) | How much excess work is waiting because servers are full? |
-| **Errors** | `num-of-errors` | How many jobs were rejected due to the waiting queue being full? |
+Each queue is its own history. A window shorter than $W$ uses only the steps that exist. Queues never share a window.
 
-Suggested mapping for `quse.csv`:
-Generate a time-series output where each row represents a time step, and the columns contain the derived USE percentages, enabling easy line-graph plotting.
+The [Slimmon post](https://blog.danslimmon.com/2019/03/25/latency-and-throughput-optimized-clusters-under-load/) is why these plots sit next to response time and throughput. Those two series stay in `derive-sys-metrics` / `plot-sys-metrics`.
 
-## Worked example (tiny)
+## Worked example
 
-Input `qmet.csv` (assuming config specifies 2 Servers, Max Queue Size 4):
+One server. Three steps, so the 10, 100, and 1000 windows are identical.
+
 ```csv
 time-step,queue-sys-id,num-jobs-in-queue,num-jobs-in-service,num-of-errors
-0,0,0,1,0
-1,0,2,2,0
-2,0,4,2,1
+0,0,0,0,0
+1,0,2,1,0
+2,0,1,1,1
 ```
 
-Possible `quse.csv` output:
 ```csv
-time-step,Utilization(10),Saturation(10),Errors(10),...
-0,0.5,0.0,0
-1,1.0,0.5,0
-2,1.0,1.0,1
+time-step,queue-sys-id,Utilization(10),Saturation(10),Errors(10),Utilization(100),Saturation(100),Errors(100),Utilization(1000),Saturation(1000),Errors(1000)
+0,0,0.0,0.0,0,0.0,0.0,0,0.0,0.0,0
+1,0,0.5,1.0,0,0.5,1.0,0,0.5,1.0,0
+2,0,0.666667,1.0,1,0.666667,1.0,1,0.666667,1.0,1
 ```
 
-## Implementation plan
-
-1. Parse CLI parameters for both scripts.
-2. In `compute-use`, ingest `qmet.csv` and `qconf.csv` using `pandas`. Merge or map the configuration limits to the metric time-series.
-3. Compute the normalized USE columns.
-4. Emit the `quse.csv` file.
-5. In `plot-use`, ingest `quse.csv` and use `matplotlib.pyplot` to generate a vertically stacked subplot (3 rows: U, S, E) sharing the X-axis (`time-step`).
-6. Save the figure to the designated `--out` path.
-
-## Resources
-
-* Lab PDF: *Queue Lab* §C (USE metric formulas and graphing expectations)
+At step 2 the utilization window is $(0 + 1 + 1) / 3$, the saturation window is $(0 + 2 + 1) / 3$, and the error window is $0 + 0 + 1$.
