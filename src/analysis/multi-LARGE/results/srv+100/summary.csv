@@ -1,0 +1,2 @@
+scenario,title,study,level,total_servers,packets,delivered,dropped,drop_pct,horizon_steps,drain_steps,throughput_per_step,latency_mean,latency_median,latency_p10,latency_p90,busiest_as,max_util,hub_util,mean_util
+srv+100,Servers +100%,servers,1.0,13110,100171,100171,0,0.0,5000,10,19.994,7.01,7.0,7.0,7.0,q456 (AS 456),0.324,0.111,0.005
