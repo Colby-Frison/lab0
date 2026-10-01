@@ -1,0 +1,2 @@
+scenario,study,seed,jobs,load,requested_resource_change_pct,total_servers,actual_resource_change_pct,completed,dropped,drop_pct,horizon,last_arrival,drain_ticks,throughput,latency_mean,latency_median,latency_p90,max_utilization,max_mean_waiting,peak_waiting,interior_start,interior_end_exclusive
+load-surge,load,5113,30000,1.5,0.0,1606,0.0,29765,235,0.7833333333333333,703,661,41,42.339971550497864,13.6667898538552,11.0,17.0,0.9871977240398293,26.688477951635846,32,66,594
